@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dream
 {
-	class Enemy
+	public class Enemy
 	{
 	}
 }
