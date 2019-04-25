@@ -46,7 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game.cs" />
+    <Compile Include="BugEnemy.cs" />
+    <Compile Include="Game.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Enemy.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
