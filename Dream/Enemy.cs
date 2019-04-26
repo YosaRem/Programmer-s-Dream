@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,33 +9,19 @@ namespace Dream
 {
 	public class Enemy
 	{
-	    [System.Serializable]
-	    public class MyException : System.Exception
-	    {
-	        //
-	        // For guidelines regarding the creation of new exception types, see
-	        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpgenref/html/cpconerrorraisinghandlingguidelines.asp
-	        // and
-	        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncscol/html/csharp07192001.asp
-	        //
+		public Point Location { get; set; }
+		public Size EnemySize { get; set; }
+		public List<Point> Track { get; set; }
+		public Image EnemySprite { get; set; }
 
-	        public MyException()
-	        {
-	        }
+		public Enemy(Point location)
+		{
+			Location = location;
+		}
 
-	        public MyException(string message) : base(message)
-	        {
-	        }
+		public void DrawEnemy(Graphics graphics)
+		{
 
-	        public MyException(string message, System.Exception inner) : base(message, inner)
-	        {
-	        }
-
-	        protected MyException(
-	            System.Runtime.Serialization.SerializationInfo info,
-	            System.Runtime.Serialization.StreamingContext context) : base(info, context)
-	        {
-	        }
-	    }
+		}	
 	}
 }
