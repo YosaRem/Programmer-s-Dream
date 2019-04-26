@@ -48,7 +48,12 @@
   <ItemGroup>
     <Compile Include="Game.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="ILevel.cs" />
+    <Compile Include="InformationForGame.cs" />
+    <Compile Include="Level.cs" />
+    <Compile Include="MoveTypeEnum.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="PlayerAnimation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
