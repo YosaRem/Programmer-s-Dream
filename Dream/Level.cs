@@ -39,6 +39,7 @@ namespace Dream
 		        if (splitLine[0] == "E")
 		            Enemies.Add(new Enemy(new Point(Convert.ToInt32(splitLine[1]),
 		                Convert.ToInt32(splitLine[2]))));
+		        line = level.ReadLine();
 
 		    }
 		}
@@ -46,7 +47,15 @@ namespace Dream
 		public void DrawLavel(Graphics graphics)
 		{
 			graphics.DrawImage(LavelImage, new Point(0, 0));
-			throw new System.NotImplementedException();
+		    foreach (var platform in Platforms)
+		    {
+		        graphics.DrawRectangle(new Pen(Color.Black), platform);
+		    }
+
+		    //foreach (var enemy in Enemies)
+		    //{
+		    //    enemy.DrawEnemy(graphics);
+		    //}
 		}
 	}
 }
