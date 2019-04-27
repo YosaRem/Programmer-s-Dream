@@ -8,5 +8,6 @@ namespace Dream
 {
 	class Player
 	{
+
 	}
 }
