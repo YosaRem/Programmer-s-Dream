@@ -40,14 +40,24 @@ namespace Dream
 		        if (splitLine[0] == "E")
 		            Enemies.Add(new Enemy(new Point(Convert.ToInt32(splitLine[1]),
 		                Convert.ToInt32(splitLine[2]))));
+		        line = level.ReadLine();
 
 		    }
 		}
 
 		public void DrawLavel(Graphics graphics)
 		{
-			//graphics.DrawImage(LavelImage, new Point(0, 0));
-			graphics.DrawRectangle(new Pen(Color.Brown, 2), Platforms[0]);
-		}
+            var brush = new SolidBrush(
+                Color.DarkSlateGray);
+            graphics.DrawImage(LavelImage, new Point(0, 0));
+		    foreach (var platform in Platforms)
+		    {
+		        graphics.FillRectangle(brush, platform);
+		    }
+            //foreach (var enemy in Enemies)
+            //{
+            //    enemy.DrawEnemy(graphics);
+            //}
+        }
 	}
 }

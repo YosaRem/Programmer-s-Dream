@@ -15,11 +15,11 @@ namespace Dream
 		public Player Player { get; set; }
 		public Level CurrentLevel { get; set; }
 
-		public Game()
+		public Game(Level level)
 		{
 			ClientSize = new Size(600, 800);
 			DoubleBuffered = true;
-			CurrentLevel = new Level();
+			CurrentLevel = level;
 			var timer = new Timer();
 			Player = new Player(CurrentLevel.StartPlayerLocation);
 			timer.Interval = 1;
