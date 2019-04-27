@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Dream
 {
-	interface ILevel
+	public interface ILevel
 	{
 		Point StartPlayerLocation { get; set; }
 		List<Rectangle> Platforms { get; set; }
-		Image LavelImage { get; set; }
+        List<Enemy> Enemies { get; set; }
+        Image LavelImage { get; set; }
 		void ExtractLavelFormFile(string path);
 		void DrawLavel(Graphics graphics);
 	}
