@@ -19,6 +19,7 @@ namespace Dream
 			Platforms = new List<Rectangle>();
             Enemies = new List<Enemy>();
 			StartPlayerLocation = new Point(300, 300);
+			Platforms.Add(new Rectangle(250, 350, 100, 20));
 		}
 
 		public void ExtractLavelFormFile(string path)

@@ -22,7 +22,7 @@ namespace Dream
 			CurrentLevel = level;
 			var timer = new Timer();
 			Player = new Player(CurrentLevel.StartPlayerLocation);
-			timer.Interval = 10;
+			timer.Interval = 1;
 
 			KeyPressing();
 			Paint += (sender, args) =>
