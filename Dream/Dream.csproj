@@ -50,15 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateLevel\CreateAnimation.cs" />
-    <Compile Include="CreateLevel\CreateCommand.cs" />
-    <Compile Include="CreateLevel\CreateMap.cs" />
     <Compile Include="Game.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Enemy.cs" />
     <Compile Include="ILevel.cs" />
     <Compile Include="InformationForGame.cs" />
+    <Compile Include="JumpAndFall.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="MoveTypeEnum.cs" />
     <Compile Include="Player.cs" />

@@ -14,37 +14,22 @@ namespace Dream
 		public Size PlayerSize { get; set; }
 		public Dictionary<MoveType, Action<Player, Graphics>> MovementSet { get; set; }
 		public MoveType CurrentTypeMovement { get; set; }
-		public bool IsJumping { get; set; }
-		public bool IsFalling { get; set; }
-		private const int MaxJumpHeight = 100;
-		private int currentJumpHeight;
-		public int CurrentJumpHeight
-		{
-			get { return currentJumpHeight; }
-			set
-			{
-				if (currentJumpHeight > MaxJumpHeight)
-				{
-					IsFalling = true;
-					currentJumpHeight = 0;
-				}
-
-				currentJumpHeight++;
-			}
-		}
+		public JumpAndFall JumpAbility { get; set; }
 
 		public Player(Point startLocation)
 		{
-			MovementSet = new Dictionary<MoveType, Action<Player, Graphics>>();
-			MovementSet[MoveType.Down] = PlayerAnimation.Fall;
-			MovementSet[MoveType.Up] = PlayerAnimation.Jump;
-			MovementSet[MoveType.Right] = PlayerAnimation.GoRight;
-			MovementSet[MoveType.Left] = PlayerAnimation.GoLeft;
-			MovementSet[MoveType.Stand] = PlayerAnimation.Stand;
+			MovementSet = new Dictionary<MoveType, Action<Player, Graphics>>
+			{
+				[MoveType.Down] = PlayerAnimation.Fall,
+				[MoveType.Up] = PlayerAnimation.Jump,
+				[MoveType.Right] = PlayerAnimation.GoRight,
+				[MoveType.Left] = PlayerAnimation.GoLeft,
+				[MoveType.Stand] = PlayerAnimation.Stand
+			};
 
 			Location = startLocation;
 			CurrentTypeMovement = MoveType.Stand;
-			CurrentJumpHeight = 0;
+			JumpAbility = new JumpAndFall(50, 4);
 			PlayerSize = new Size(25, 25);
 		}
 
@@ -52,18 +37,22 @@ namespace Dream
 
 		public void ChangeMoveType(MoveType newMove, List<Rectangle> platforms)
 		{
-			if ((newMove == MoveType.Left || newMove == MoveType.Right) && IsStandOnPlatform(platforms))
+			if (newMove == MoveType.Left || newMove == MoveType.Right)
 				CurrentTypeMovement = newMove;
-			if (newMove == MoveType.Up && !IsJumping)
-				IsJumping = true;
+			if (newMove == MoveType.Up && !JumpAbility.IsJumping)
+				JumpAbility.IsJumping = true;
 
-			if (newMove == MoveType.Stand && IsStandOnPlatform(platforms))
+			if (newMove == MoveType.Stand)
 				CurrentTypeMovement = MoveType.Stand;
 		}
 
 		public bool IsStandOnPlatform(List<Rectangle> platforms)
 		{
-			return true;
+			foreach (var platform in platforms)
+				if(platform.X < Location.X && platform.X + platform.Width > Location.X)
+					if (platform.Y <= Location.Y + PlayerSize.Height)
+						return true;
+			return false;
 		}
 
 		public void Move(List<Rectangle> platforms)
@@ -74,19 +63,7 @@ namespace Dream
 				newX++;
 			if (CurrentTypeMovement == MoveType.Left)
 				newX--;
-			if (IsJumping && !IsFalling)
-			{
-				CurrentJumpHeight++;
-				newY--;
-			}
-
-			if (IsStandOnPlatform(platforms))
-			{
-				IsFalling = IsJumping = false;
-			}
-
-			if (IsFalling)
-				newY++;	
+			newY += JumpAbility.RecalculateY(this, IsStandOnPlatform(platforms));
 			Location = new Point(newX, newY);
 		}
 	}

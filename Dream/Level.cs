@@ -19,6 +19,7 @@ namespace Dream
 			Platforms = new List<Rectangle>();
             Enemies = new List<Enemy>();
 			StartPlayerLocation = new Point(300, 300);
+			Platforms.Add(new Rectangle(250, 350, 100, 20));
 		}
 
 		public void ExtractLavelFormFile(string path)
@@ -45,8 +46,8 @@ namespace Dream
 
 		public void DrawLavel(Graphics graphics)
 		{
-			graphics.DrawImage(LavelImage, new Point(0, 0));
-			throw new System.NotImplementedException();
+			//graphics.DrawImage(LavelImage, new Point(0, 0));
+			graphics.DrawRectangle(new Pen(Color.Brown, 2), Platforms[0]);
 		}
 	}
 }
