@@ -10,11 +10,12 @@ namespace Dream
 {
 	public class Player
 	{
-		public Point Location { get; set; }
-		public Size PlayerSize { get; set; }
-		public Dictionary<MoveType, Action<Player, Graphics>> MovementSet { get; set; }
+		public Rectangle Location { get; set; }
+		public Dictionary<MoveType, Action<Player, Graphics>> MovementSet { get; private set; }
 		public MoveType CurrentTypeMovement { get; set; }
 		public JumpAndFall JumpAbility { get; set; }
+		public RightAndLeft GoAbility { get; set; }
+		public PossibilityMove PossibilityMove { get; set; }
 
 		public Player(Point startLocation)
 		{
@@ -27,44 +28,31 @@ namespace Dream
 				[MoveType.Stand] = PlayerAnimation.Stand
 			};
 
-			Location = startLocation;
+			PossibilityMove = new PossibilityMove();
+			Location = new Rectangle(startLocation, new Size(25, 25));
 			CurrentTypeMovement = MoveType.Stand;
-			JumpAbility = new JumpAndFall(50, 4);
-			PlayerSize = new Size(25, 25);
+			JumpAbility = new JumpAndFall(50, 2, 2);
+			GoAbility = new RightAndLeft(2);
 		}
 
 		public void DrawPlayer(Graphics graphics) => MovementSet[CurrentTypeMovement](this, graphics);
 
 		public void ChangeMoveType(MoveType newMove, List<Rectangle> platforms)
 		{
-			if (newMove == MoveType.Left || newMove == MoveType.Right)
+			if (newMove == MoveType.Right || newMove == MoveType.Left)
 				CurrentTypeMovement = newMove;
-			if (newMove == MoveType.Up && !JumpAbility.IsJumping)
-				JumpAbility.IsJumping = true;
-
+			if (newMove == MoveType.Up)
+				JumpAbility.Jump();
 			if (newMove == MoveType.Stand)
 				CurrentTypeMovement = MoveType.Stand;
-		}
-
-		public bool IsStandOnPlatform(List<Rectangle> platforms)
-		{
-			foreach (var platform in platforms)
-				if(platform.X < Location.X && platform.X + platform.Width > Location.X)
-					if (platform.Y <= Location.Y + PlayerSize.Height)
-						return true;
-			return false;
-		}
+		}		
 
 		public void Move(List<Rectangle> platforms)
 		{
-			var newX = Location.X;
-			var newY = Location.Y;
-			if (CurrentTypeMovement == MoveType.Right)
-				newX++;
-			if (CurrentTypeMovement == MoveType.Left)
-				newX--;
-			newY += JumpAbility.RecalculateY(this, IsStandOnPlatform(platforms));
-			Location = new Point(newX, newY);
+			PossibilityMove.RecalculatePossibilitys(this, platforms);
+			var newX = GoAbility.RecalculateX(this, PossibilityMove);
+			var newY = JumpAbility.RecalculateY(this, PossibilityMove);
+			Location = new Rectangle(new Point(newX, newY), Location.Size);
 		}
 	}
 }

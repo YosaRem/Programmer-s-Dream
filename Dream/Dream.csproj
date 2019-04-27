@@ -56,13 +56,15 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="ILevel.cs" />
     <Compile Include="InformationForGame.cs" />
-    <Compile Include="JumpAndFall.cs" />
+    <Compile Include="PlayerClasses\JumpAndFall.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="MoveTypeEnum.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="PlayerAnimation.cs" />
+    <Compile Include="PlayerClasses\Player.cs" />
+    <Compile Include="PlayerClasses\PlayerAnimation.cs" />
+    <Compile Include="PlayerClasses\PossibilityMove.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PlayerClasses\RightAndLeft.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -17,12 +17,7 @@ namespace Dream
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-            var level = new Level();
-            level.ExtractLavelFormFile(
-                @"C:\Users\Даша\source\repos\YosaRem\Programmer-s-Dream\Dream\Leveles\1_HelloWorld.txt");
-		    level.LavelImage =
-		        Image.FromFile(@"C:\Users\Даша\source\repos\YosaRem\Programmer-s-Dream\Dream\Images\background.JPG");
-            Application.Run(new Game(level));
+            Application.Run(new Game());
 		}
 	}
 }
