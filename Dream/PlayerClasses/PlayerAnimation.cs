@@ -14,13 +14,13 @@ namespace Dream
 			graphics.DrawEllipse(new Pen(Color.Brown, 3),
 				player.Location.X,
 				player.Location.Y,
-				player.PlayerSize.Width,
-				player.PlayerSize.Height);
+				player.Location.Width,
+				player.Location.Height);
 		}
 
 		public static void Jump(Player player, Graphics graphics)
 		{
-			var image = Image.FromFile(@"C:\Users\Yosa Rem\source\repos\Dream\Dream\Sprites\Player\Player.png");
+			var image = Image.FromFile(@"C:\Users\User\Source\Repos\YosaRem\Programmer-s-Dream\Dream\Images\Player.png");
 			graphics.DrawImage(image, player.Location);
 		}
 
@@ -29,8 +29,8 @@ namespace Dream
 			graphics.DrawEllipse(new Pen(Color.Brown, 3),
 				player.Location.X,
 				player.Location.Y,
-				player.PlayerSize.Width,
-				player.PlayerSize.Height);
+				player.Location.Width,
+				player.Location.Height);
 		}
 
 		public static void GoLeft(Player player, Graphics graphics)
@@ -38,13 +38,13 @@ namespace Dream
 			graphics.DrawEllipse(new Pen(Color.Brown, 3),
 				player.Location.X,
 				player.Location.Y,
-				player.PlayerSize.Width,
-				player.PlayerSize.Height);
+				player.Location.Width,
+				player.Location.Height);
 		}
 
 		public static void Stand(Player player, Graphics graphics)
 		{
-			var image = Image.FromFile(@"C:\Users\Yosa Rem\source\repos\Dream\Dream\Sprites\Player\Player.png");
+			var image = Image.FromFile(@"C:\Users\User\Source\Repos\YosaRem\Programmer-s-Dream\Dream\Images\Player.png");
 			graphics.DrawImage(image, player.Location);
 		}
 	}

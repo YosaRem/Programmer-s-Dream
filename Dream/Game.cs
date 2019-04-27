@@ -15,24 +15,23 @@ namespace Dream
 		public Player Player { get; set; }
 		public Level CurrentLevel { get; set; }
 
-		public Game(Level level)
+		public Game()
 		{
 			ClientSize = new Size(600, 800);
 			DoubleBuffered = true;
-			CurrentLevel = level;
+			CurrentLevel = new Level();
 			var timer = new Timer();
 			Player = new Player(CurrentLevel.StartPlayerLocation);
 			timer.Interval = 1;
 
-			KeyPressing();
 			Paint += (sender, args) =>
 			{
 				CurrentLevel.DrawLavel(args.Graphics);
 				Player.DrawPlayer(args.Graphics);
 			};
-
-			timer.Tick += (sender, args) => Invalidate();
+			KeyPressing();
 			timer.Tick += (sender, args) => Player.Move(CurrentLevel.Platforms);
+			timer.Tick += (sender, args) => Invalidate();
 			timer.Start();
 		}
 
