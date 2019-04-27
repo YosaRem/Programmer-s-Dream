@@ -46,16 +46,17 @@ namespace Dream
 
 		public void DrawLavel(Graphics graphics)
 		{
-			graphics.DrawImage(LavelImage, new Point(0, 0));
+            var brush = new SolidBrush(
+                Color.DarkSlateGray);
+            graphics.DrawImage(LavelImage, new Point(0, 0));
 		    foreach (var platform in Platforms)
 		    {
-		        graphics.DrawRectangle(new Pen(Color.Black), platform);
+		        graphics.FillRectangle(brush, platform);
 		    }
-
-		    //foreach (var enemy in Enemies)
-		    //{
-		    //    enemy.DrawEnemy(graphics);
-		    //}
-		}
+            //foreach (var enemy in Enemies)
+            //{
+            //    enemy.DrawEnemy(graphics);
+            //}
+        }
 	}
 }
