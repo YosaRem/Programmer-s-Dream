@@ -50,10 +50,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.cs" />
+    <Compile Include="EnemyClasses\BugEnemy.cs" />
+    <Compile Include="EnemyClasses\IEnemy.cs" />
+    <Compile Include="EnemyClasses\RunTimeEnemy.cs" />
+    <Compile Include="EnemyClasses\TrackMove.cs" />
     <Compile Include="Game.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Enemy.cs" />
+    <Compile Include="EnemyClasses\Enemy.cs" />
     <Compile Include="ILevel.cs" />
     <Compile Include="InformationForGame.cs" />
     <Compile Include="PlayerClasses\JumpAndFall.cs" />
