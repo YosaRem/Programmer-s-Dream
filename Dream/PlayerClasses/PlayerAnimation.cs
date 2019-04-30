@@ -20,7 +20,7 @@ namespace Dream
 
 		public static void Jump(Player player, Graphics graphics)
 		{
-			var image = Image.FromFile(@"C:\Users\User\Source\Repos\YosaRem\Programmer-s-Dream\Dream\Images\Player.png");
+			var image = Image.FromFile(@"C:\Users\Yosa Rem\Source\Repos\YosaRem\Programmer-s-Dream\Dream\Images\Player.png");
 			graphics.DrawImage(image, player.Location);
 		}
 
@@ -44,7 +44,7 @@ namespace Dream
 
 		public static void Stand(Player player, Graphics graphics)
 		{
-			var image = Image.FromFile(@"C:\Users\User\Source\Repos\YosaRem\Programmer-s-Dream\Dream\Images\Player.png");
+			var image = Image.FromFile(@"C:\Users\Yosa Rem\Source\Repos\YosaRem\Programmer-s-Dream\Dream\Images\Player.png");
 			graphics.DrawImage(image, player.Location);
 		}
 	}

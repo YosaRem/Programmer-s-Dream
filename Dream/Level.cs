@@ -18,8 +18,8 @@ namespace Dream
 		{
 			Platforms = new List<Rectangle>();
             Enemies = new List<Enemy>();
-			ExtractLavelFormFile(@"C:\Users\User\Source\Repos\YosaRem\Programmer-s-Dream\Dream\Leveles\1_HelloWorld.txt");
-			LavelImage = Image.FromFile(@"C:\Users\User\Source\Repos\YosaRem\Programmer-s-Dream\Dream\Images\background.JPG");
+			ExtractLavelFormFile(@"C:\Users\Yosa Rem\Source\Repos\YosaRem\Programmer-s-Dream\Dream\Leveles\1_HelloWorld.txt");
+			LavelImage = Image.FromFile(@"C:\Users\Yosa Rem\Source\Repos\YosaRem\Programmer-s-Dream\Dream\Images\background.JPG");
 		}
 
 		public void ExtractLavelFormFile(string path)
