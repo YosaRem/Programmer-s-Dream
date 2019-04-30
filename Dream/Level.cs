@@ -37,12 +37,12 @@ namespace Dream
 		        if (splitLine[0] == "P")
 		            StartPlayerLocation = new Point(Convert.ToInt32(splitLine[1]),
 		                Convert.ToInt32(splitLine[2]));
-		        if (splitLine[0] == "E")
-		            Enemies.Add(new Enemy(new Point(Convert.ToInt32(splitLine[1]),
-		                Convert.ToInt32(splitLine[2]))));
-		        line = level.ReadLine();
+				if (splitLine[0] == "E")
+					Enemies.Add(new Enemy(new Point(Convert.ToInt32(splitLine[1]),
+						Convert.ToInt32(splitLine[2])), new List<Point>()));
+				line = level.ReadLine();
 
-		    }
+			}
 		}
 
 		public void DrawLavel(Graphics graphics)

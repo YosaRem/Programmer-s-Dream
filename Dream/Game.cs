@@ -17,7 +17,7 @@ namespace Dream
 
 		public Game()
 		{
-			ClientSize = new Size(600, 800);
+			ClientSize = new Size(800, 600);
 			DoubleBuffered = true;
 			CurrentLevel = new Level();
 			var timer = new Timer();
@@ -50,7 +50,8 @@ namespace Dream
 			};
 			KeyUp += (sender, args) =>
 			{
-				Player.ChangeMoveType(MoveType.Stand, CurrentLevel.Platforms);
+				if(args.KeyCode == Keys.Right || args.KeyCode == Keys.Left)
+					Player.ChangeMoveType(MoveType.Stand, CurrentLevel.Platforms);
 			};
 		}
 
