@@ -24,6 +24,7 @@ namespace Dream
 
 		public void ExtractLavelFormFile(string path)
 		{
+			//TODO опасное место, здесь может вылететь исключение, добавить try
 		    var level = new StreamReader(path);
 		    var line = level.ReadLine();
 		    while (line != null)
@@ -38,11 +39,17 @@ namespace Dream
 		            StartPlayerLocation = new Point(Convert.ToInt32(splitLine[1]),
 		                Convert.ToInt32(splitLine[2]));
 				if (splitLine[0] == "E")
-					Enemies.Add(new Enemy(new Point(Convert.ToInt32(splitLine[1]),
-						Convert.ToInt32(splitLine[2])), new List<Point>()));
+					Enemies.Add(new BugEnemy(new Point(Convert.ToInt32(splitLine[1]),
+						Convert.ToInt32(splitLine[2])), new List<Point>() {new Point(40, 40), new Point(100, 100), new Point(200, 10)}));
 				line = level.ReadLine();
 
 			}
+		}
+
+		public void MoveEnemy()
+		{
+			foreach (var enemy in Enemies)
+				enemy.Move();
 		}
 
 		public void DrawLavel(Graphics graphics)
@@ -51,13 +58,9 @@ namespace Dream
                 Color.DarkSlateGray);
             graphics.DrawImage(LavelImage, new Point(0, 0));
 		    foreach (var platform in Platforms)
-		    {
 		        graphics.FillRectangle(brush, platform);
-		    }
-            //foreach (var enemy in Enemies)
-            //{
-            //    enemy.DrawEnemy(graphics);
-            //}
-        }
+			foreach (var enemy in Enemies)
+				enemy.Draw(graphics);
+		}
 	}
 }

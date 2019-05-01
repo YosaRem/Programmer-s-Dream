@@ -8,13 +8,6 @@ namespace Dream
 {
 	public class RightAndLeft
 	{
-		private int GoDelta { get; set; }
-
-		public RightAndLeft(int goDelta)
-		{
-			GoDelta = goDelta;
-		}
-
 		public int RecalculateX(Player player, PossibilityMove possibility)
 		{
 			if (player.CurrentTypeMovement == MoveType.Stand)
@@ -22,11 +15,11 @@ namespace Dream
 			if (player.CurrentTypeMovement == MoveType.Right)
 				return possibility.RightWall.HasValue
 					? possibility.RightWall.Value.Left - player.Location.Width
-					: player.Location.Left + GoDelta;
-			if(player.CurrentTypeMovement == MoveType.Left)
+					: player.Location.Left + Config.PlayerGoDelta;
+			if (player.CurrentTypeMovement == MoveType.Left)
 				return possibility.LeftWall.HasValue
 					? possibility.LeftWall.Value.Right
-					: player.Location.Left - GoDelta;
+					: player.Location.Left - Config.PlayerGoDelta;
 			return player.Location.Left;
 		}
 	}

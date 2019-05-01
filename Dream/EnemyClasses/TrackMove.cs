@@ -6,18 +6,26 @@ using System.Threading.Tasks;
 
 namespace Dream
 {
-	class TrackMove
+	public static class TrackMove
 	{
-		public int RecalculateX(Enemy enemy)
+		public static int RecalculateX(Enemy enemy)
 		{
-			return enemy.CurrentDestinationPoint.X < enemy.Location.Left
+			var delta = enemy.Track[enemy.CurrentDestinationPoint].X - enemy.Location.Left;
+			if (Math.Abs(delta) <= Config.EnemyDefautMoveDelta)
+				return enemy.Track[enemy.CurrentDestinationPoint].X;
+			return delta < 0
 				? enemy.Location.Left - Config.EnemyDefautMoveDelta
 				: enemy.Location.Left + Config.EnemyDefautMoveDelta;
 		}
 
-		public int RecalculateY(Enemy enemy)
+		public static int RecalculateY(Enemy enemy)
 		{
-			return 0;
+			var delta = enemy.Track[enemy.CurrentDestinationPoint].Y - enemy.Location.Top;
+			if (Math.Abs(delta) <= Config.EnemyDefautMoveDelta)
+				return enemy.Track[enemy.CurrentDestinationPoint].Y;
+			return delta < 0
+				? enemy.Location.Top - Config.EnemyDefautMoveDelta
+				: enemy.Location.Top + Config.EnemyDefautMoveDelta;
 		}
 	}
 }

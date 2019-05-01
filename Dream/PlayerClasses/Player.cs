@@ -11,7 +11,7 @@ namespace Dream
 	public class Player
 	{
 		public Rectangle Location { get; set; }
-		public Dictionary<MoveType, Action<Player, Graphics>> MovementSet { get; private set; }
+		private Dictionary<MoveType, Action<Player, Graphics>> MovementSet { get; set; }
 		public MoveType CurrentTypeMovement { get; set; }
 		public JumpAndFall JumpAbility { get; set; }
 		public RightAndLeft GoAbility { get; set; }
@@ -31,8 +31,8 @@ namespace Dream
 			PossibilityMove = new PossibilityMove();
 			Location = new Rectangle(startLocation, new Size(25, 25));
 			CurrentTypeMovement = MoveType.Stand;
-			JumpAbility = new JumpAndFall(50, 2, 2);
-			GoAbility = new RightAndLeft(2);
+			JumpAbility = new JumpAndFall(50, 2);
+			GoAbility = new RightAndLeft();
 		}
 
 		public void DrawPlayer(Graphics graphics) => MovementSet[CurrentTypeMovement](this, graphics);
@@ -53,6 +53,16 @@ namespace Dream
 			var newX = GoAbility.RecalculateX(this, PossibilityMove);
 			var newY = JumpAbility.RecalculateY(this, PossibilityMove);
 			Location = new Rectangle(new Point(newX, newY), Location.Size);
+		}
+
+		public bool IsPlayerAlive(List<Enemy> enemies)
+		{
+			foreach (var enemy in enemies)
+				return !(enemy.Location.Left <= Location.Right
+				        && Location.Left <= enemy.Location.Right
+				        && enemy.Location.Top <= Location.Bottom
+				        && Location.Top <= enemy.Location.Bottom);
+			return true;
 		}
 	}
 }

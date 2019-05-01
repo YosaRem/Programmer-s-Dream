@@ -11,7 +11,7 @@ namespace Dream
 {
 	public class Game : Form
 	{
-		public int GameState { get; set; }
+		public GameInfo CurrentGameInfo { get; set; }
 		public Player Player { get; set; }
 		public Level CurrentLevel { get; set; }
 
@@ -19,20 +19,29 @@ namespace Dream
 		{
 			ClientSize = new Size(800, 600);
 			DoubleBuffered = true;
+
+			CurrentGameInfo = new GameInfo();
 			CurrentLevel = new Level();
-			var timer = new Timer();
 			Player = new Player(CurrentLevel.StartPlayerLocation);
+			var timer = new Timer();		
 			timer.Interval = 1;
+
+			
+			KeyPressing();
+			TickCommands(timer);
+			timer.Start();
 
 			Paint += (sender, args) =>
 			{
-				CurrentLevel.DrawLavel(args.Graphics);
-				Player.DrawPlayer(args.Graphics);
+				if (CurrentGameInfo.IsPlayerAlive)
+				{
+					CurrentLevel.DrawLavel(args.Graphics);
+					Player.DrawPlayer(args.Graphics);
+				}
+				else
+					Ads.YouDied(args.Graphics);
+
 			};
-			KeyPressing();
-			timer.Tick += (sender, args) => Player.Move(CurrentLevel.Platforms);
-			timer.Tick += (sender, args) => Invalidate();
-			timer.Start();
 		}
 
 		public void KeyPressing()
@@ -55,10 +64,24 @@ namespace Dream
 			};
 		}
 
+		public void TickCommands(Timer timer)
+		{
+			timer.Tick += (sender, args) => CurrentLevel.MoveEnemy();
+			timer.Tick += (sender, args) => Player.Move(CurrentLevel.Platforms);
+			timer.Tick += (sender, args) =>
+			{
+				var isPlayerOk = Player.IsPlayerAlive(CurrentLevel.Enemies);
+				if (!isPlayerOk)
+					CurrentGameInfo.IsPlayerAlive = false;
+			};
+			timer.Tick += (sender, args) => Invalidate();
+		}
+
 		public void ResetLevel()
 		{
 			CurrentLevel = new Level();
 			Player = new Player(CurrentLevel.StartPlayerLocation);
+			CurrentGameInfo.Reset();
 		}
 	}
 }

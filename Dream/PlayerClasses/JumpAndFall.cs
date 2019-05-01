@@ -11,16 +11,14 @@ namespace Dream
 		public bool IsJumping { get; set; }
 		public bool IsFalling { get; set; }
 		private int MaxJumpHeight { get; set; }
-		private int JumpDelta { get; set; }
 		public int CurrentJumpHeight { get; set; }
 		public int JumpCount { get; set; }
 		private int MaxJumpCount { get; set; }
 
-		public JumpAndFall(int maxHeight, int jumpDelta, int maxJumpCount)
+		public JumpAndFall(int maxHeight, int maxJumpCount)
 		{
 			MaxJumpCount = maxJumpCount;
 			MaxJumpHeight = maxHeight;
-			JumpDelta = jumpDelta;
 		}
 
 		public void Jump()
@@ -60,11 +58,11 @@ namespace Dream
 					CurrentJumpHeight = 0;
 					return possibility.Ceiling.Value.Bottom;
 				}
-				CurrentJumpHeight += JumpDelta;
-				return player.Location.Top - JumpDelta;
+				CurrentJumpHeight += Config.PlayerJumpDelta; ;
+				return player.Location.Top - Config.PlayerJumpDelta; ;
 			}
 			if (IsFalling)
-				return player.Location.Top + JumpDelta;
+				return player.Location.Top + Config.PlayerJumpDelta; ;
 			return player.Location.Top;
 		}
 	}

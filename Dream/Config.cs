@@ -8,8 +8,8 @@ namespace Dream
 {
 	class Config
 	{
-		public const int PlayerGoDelta = 4;
+		public const int PlayerGoDelta = 6;
 		public const int PlayerJumpDelta = 3;
-		public const int EnemyDefautMoveDelta = 2;
+		public const int EnemyDefautMoveDelta = 1;
 	}
 }

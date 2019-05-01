@@ -10,13 +10,10 @@ namespace Dream
 	public class BugEnemy : Enemy
 	{
 		public Image BugImage { get; set; }
-		public int DeltaMove { get; set; }
 
-		public BugEnemy(Point location, List<Point> track) : base(location, track)
+		public BugEnemy(Point location, List<Point> track) : base(location, track) 
 		{
-
+			//TODO load Bug image and override Draw
 		}
-
-
 	}
 }

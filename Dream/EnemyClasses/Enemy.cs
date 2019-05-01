@@ -11,23 +11,28 @@ namespace Dream
 	{
 		public Rectangle Location { get; set; }
 		public List<Point> Track { get; set; }
-		public Point CurrentDestinationPoint { get; set; }
+		public int CurrentDestinationPoint { get; set; }
 
 		public Enemy(Point location, List<Point> track)
 		{
 			Location = new Rectangle(location.X, location.Y, 25, 25);
 			Track = track;
-			CurrentDestinationPoint = Track[0];
+			CurrentDestinationPoint = 0;
 		}
 
-		public void DrawEnemy(Graphics graphics)
+		public virtual void Draw(Graphics graphics)
 		{
-
+			graphics.DrawRectangle(new Pen(Color.Black, 1), Location.X, Location.Y,
+				Location.Width, Location.Height);
 		}	
 
 		public virtual void Move()
 		{
-
+			var newX = TrackMove.RecalculateX(this);
+			var newY = TrackMove.RecalculateY(this);
+			if (newX == Location.Left && newY == Location.Top)
+				CurrentDestinationPoint = ((CurrentDestinationPoint + Track.Count + 1) % Track.Count);
+			Location = new Rectangle(newX, newY, 25, 25);
 		}
 	}
 }
