@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Dream
 {
-	class Player
+	public enum MoveType
 	{
-
+		Stand,
+		Up,
+		Down,
+		Right,
+		Left
 	}
 }
