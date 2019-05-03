@@ -11,19 +11,31 @@ namespace Dream
 {
     public class GamesFiles
     {
-        public static string CurrentDirectory = GetCurrentDirectory();
-        public Image PlayerImage = Image.FromFile(CurrentDirectory + "\\GameData\\Images\\Player.png");
-        public LevelFiles HelloWorldLevel = new LevelFiles(
-            CurrentDirectory + "\\GameData\\Images\\background.JPG",
-            new List<string>(), new List<string>(),
-            CurrentDirectory + "\\GameData\\Leveles\\1_HelloWorld.txt");
+        private string CurrentDirectory { get; set; }
+        public static string PlayerImages { get; set; }
+        public Queue<LevelFiles> Levels { get; set; }
+        public LevelFiles CurrentLevel { get; set; }
+
+        public GamesFiles()
+        {
+            CurrentDirectory = GetCurrentDirectory();
+            PlayerImages = CurrentDirectory + @"\Player";
+            Levels = new Queue<LevelFiles>();
+			var quantityLevel = new DirectoryInfo(CurrentDirectory + @"\Leveles").GetFiles().Length;
+            for (var i = 0; i < quantityLevel; i++)
+                Levels.Enqueue(new LevelFiles(CurrentDirectory + @"\Images\background.JPG",
+                    new List<string>(),
+                    new List<string>(),
+                    CurrentDirectory + @"\Levels\" + i.ToString() + ".txt" ));
+            CurrentLevel = Levels.Dequeue();
+        }
 
         static string GetCurrentDirectory()
         {
             var location = Assembly.GetExecutingAssembly().Location;
             var path = Path.GetDirectoryName(location);
             var dir = Directory.GetParent(Directory.GetParent(path).ToString()).ToString();
-            return dir;
+            return dir + @"\GameData";
         }
     }
 

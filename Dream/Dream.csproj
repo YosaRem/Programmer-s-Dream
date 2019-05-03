@@ -64,7 +64,6 @@
     <Compile Include="EnemyClasses\Enemy.cs" />
     <Compile Include="GameInfo.cs" />
     <Compile Include="ILevel.cs" />
-    <Compile Include="InformationForGame.cs" />
     <Compile Include="PlayerClasses\JumpAndFall.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="MoveTypeEnum.cs" />
@@ -99,11 +98,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GameData\Images\" />
+    <Folder Include="GameData\Player\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GameData\Leveles\3_HardCode.txt" />
-    <Content Include="GameData\Leveles\1_HelloWorld.txt" />
-    <Content Include="GameData\Leveles\2_IndianCode.txt" />
+    <Content Include="GameData\Leveles\0.txt" />
+    <Content Include="GameData\Leveles\1.txt" />
+    <Content Include="GameData\Leveles\2.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
