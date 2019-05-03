@@ -16,8 +16,9 @@ namespace Dream
 		public JumpAndFall JumpAbility { get; set; }
 		public RightAndLeft GoAbility { get; set; }
 		public PossibilityMove PossibilityMove { get; set; }
+        public Image Image { get; set; }
 
-		public Player(Point startLocation)
+		public Player(Point startLocation, Image playerImage)
 		{
 			MovementSet = new Dictionary<MoveType, Action<Player, Graphics>>
 			{
@@ -33,6 +34,7 @@ namespace Dream
 			CurrentTypeMovement = MoveType.Stand;
 			JumpAbility = new JumpAndFall(50, 2);
 			GoAbility = new RightAndLeft();
+		    Image = playerImage;
 		}
 
 		public void DrawPlayer(Graphics graphics) => MovementSet[CurrentTypeMovement](this, graphics);

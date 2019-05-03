@@ -13,7 +13,8 @@ namespace Dream
 		List<Rectangle> Platforms { get; set; }
         List<Enemy> Enemies { get; set; }
         Image LavelImage { get; set; }
-		void ExtractLavelFormFile(string path);
+        LevelFiles Files { get; set; }
+		void ExtractLevelFormFile(string path);
 		void DrawLavel(Graphics graphics);
 	}
 }

@@ -14,15 +14,17 @@ namespace Dream
 		public GameInfo CurrentGameInfo { get; set; }
 		public Player Player { get; set; }
 		public Level CurrentLevel { get; set; }
+        public GamesFiles GameFiles { get; set; }
 
 		public Game()
 		{
 			ClientSize = new Size(800, 600);
 			DoubleBuffered = true;
 
+            GameFiles = new GamesFiles();
 			CurrentGameInfo = new GameInfo();
-			CurrentLevel = new Level();
-			Player = new Player(CurrentLevel.StartPlayerLocation);
+			CurrentLevel = new Level(GameFiles.HelloWorldLevel);
+			Player = new Player(CurrentLevel.StartPlayerLocation, GameFiles.PlayerImage);
 			var timer = new Timer();		
 			timer.Interval = 1;
 
@@ -79,8 +81,8 @@ namespace Dream
 
 		public void ResetLevel()
 		{
-			CurrentLevel = new Level();
-			Player = new Player(CurrentLevel.StartPlayerLocation);
+			CurrentLevel = new Level(GameFiles.HelloWorldLevel);
+			Player = new Player(CurrentLevel.StartPlayerLocation, GameFiles.PlayerImage);
 			CurrentGameInfo.Reset();
 		}
 	}
