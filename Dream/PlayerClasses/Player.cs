@@ -51,10 +51,12 @@ namespace Dream
 		public bool IsPlayerAlive(List<Enemy> enemies)
 		{
 			foreach (var enemy in enemies)
-				return !(enemy.Location.Left <= Location.Right
-				        && Location.Left <= enemy.Location.Right
-				        && enemy.Location.Top <= Location.Bottom
-				        && Location.Top <= enemy.Location.Bottom);
+				if (enemy.Location.Left <= Location.Right
+				    && Location.Left <= enemy.Location.Right
+				    && enemy.Location.Top <= Location.Bottom
+				    && Location.Top <= enemy.Location.Bottom)
+					return false;
+				
 			return true;
 		}
 	}

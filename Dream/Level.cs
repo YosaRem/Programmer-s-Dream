@@ -4,57 +4,67 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using Dream.EnemyClasses;
 
 namespace Dream
 {
-	public class Level : ILevel
+	public class Level
 	{
 		public Point StartPlayerLocation { get; set; }
         public List<Enemy> Enemies { get; set; }
 		public List<Rectangle> Platforms { get; set; }
         public List<Bonus> Bonuses { get; set; }
-        public Image LavelImage { get; set; }
         public LevelFiles Files { get; set; }
 
 		public Level(LevelFiles files)
 		{
+			Files = files;
 			Platforms = new List<Rectangle>();
             Enemies = new List<Enemy>();
             Bonuses = new List<Bonus>();
-			ExtractLevelFormFile(files.Path);
-			LavelImage = files.Background;
+			ExtractLevelFormFile();
 		}
 
-		public void ExtractLevelFormFile(string path)
+		public void ExtractLevelFormFile()
 		{
-		    var level = new StreamReader(path);
+		    var level = new StreamReader(Files.Path);
 		    var line = level.ReadLine();
 		    while (line != null)
 		    {
 		        try
 		        {
 		            var splitLine = line.Split(' ');
-		            if (splitLine[0] == "R")
+		            if (splitLine[0] == "PLAT")
 		                Platforms.Add(new Rectangle(Convert.ToInt32(splitLine[1]),
 		                    Convert.ToInt32(splitLine[2]),
 		                    Convert.ToInt32(splitLine[3]),
 		                    Convert.ToInt32(splitLine[4])));
-		            if (splitLine[0] == "P")
+		            if (splitLine[0] == "PLE")
 		                StartPlayerLocation = new Point(Convert.ToInt32(splitLine[1]),
 		                    Convert.ToInt32(splitLine[2]));
-		            if (splitLine[0] == "E")
+		            if (splitLine[0] == "BUG")
 		            {
 		                var location = new Point(Convert.ToInt32(splitLine[1]), Convert.ToInt32(splitLine[2]));
 		                var track = ParseTrack(splitLine);
-		                Enemies.Add(new Enemy(location, track));
+		                Enemies.Add(new BugEnemy(location, track, Files.EnemyImagesPath));
 		            }
 
-		            if (splitLine[0] == "B")
+			        if (splitLine[0] == "RTE")
+			        {
+				        var location = new Point(Convert.ToInt32(splitLine[1]), Convert.ToInt32(splitLine[2]));
+				        var track = ParseTrack(splitLine);
+						Enemies.Add(new RunTimeEnemy(location, track, Files.EnemyImagesPath));
+					}
+
+		            if (splitLine[0] == "BON")
 		            {
 		                var start = new Point(Convert.ToInt32(splitLine[1]), Convert.ToInt32(splitLine[2]));
 		                var end = new Point(Convert.ToInt32(splitLine[3]), Convert.ToInt32(splitLine[4]));
 		                Bonuses.Add(new Bonus(start, end));
 		            }
+
+
+
                 }
 		        catch
 		        {
@@ -88,7 +98,7 @@ namespace Dream
 		public void DrawLavel(Graphics graphics)
 		{
             var brush = new SolidBrush(Color.DarkSlateGray);
-            graphics.DrawImage(LavelImage, new Point(0, 0));
+            graphics.DrawImage(Files.Background, new Point(0, 0));
 		    foreach (var platform in Platforms)
 		        graphics.FillRectangle(brush, platform);
 			foreach (var enemy in Enemies)

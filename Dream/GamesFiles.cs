@@ -23,14 +23,11 @@ namespace Dream
             Levels = new Queue<LevelFiles>();
 			var quantityLevel = new DirectoryInfo(CurrentDirectory + @"\Leveles").GetFiles().Length;
             for (var i = 0; i < quantityLevel; i++)
-                Levels.Enqueue(new LevelFiles(CurrentDirectory + @"\Images\background.JPG",
-                    new List<string>(),
-                    new List<string>(),
-                    CurrentDirectory + @"\Levels\" + i.ToString() + ".txt" ));
+                Levels.Enqueue(new LevelFiles(CurrentDirectory, i));
             CurrentLevel = Levels.Dequeue();
         }
 
-        static string GetCurrentDirectory()
+        private string GetCurrentDirectory()
         {
             var location = Assembly.GetExecutingAssembly().Location;
             var path = Path.GetDirectoryName(location);
@@ -43,24 +40,15 @@ namespace Dream
     public class LevelFiles
     {
         public Image Background;
-        public List<Image> EnemyImages;
-        public List<Image> BonusImages;
+        public string EnemyImagesPath;
+        public string BonusImagesPath;
         public string Path;
 
-        public LevelFiles(string background, List<string> enemy, List<string> bonus, string path)
+        public LevelFiles(string dir, int levelNumber)
         {
-            Background = Image.FromFile(background);
-            EnemyImages = GetImages(enemy);
-            BonusImages = GetImages(bonus);
-            Path = path;
-        }
-
-        List<Image> GetImages(List<string> paths)
-        {
-            var images = new List<Image>();
-            foreach (var path in paths)
-                images.Add(Image.FromFile(path));
-            return images;
+            Background = Image.FromFile(dir + @"\Images\background.JPG");
+            Path = dir + @"\Leveles\" + levelNumber.ToString() + ".txt";
+            EnemyImagesPath = dir + @"\Enemys";
         }
     }
 }

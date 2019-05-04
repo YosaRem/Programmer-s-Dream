@@ -63,7 +63,6 @@
     </Compile>
     <Compile Include="EnemyClasses\Enemy.cs" />
     <Compile Include="GameInfo.cs" />
-    <Compile Include="ILevel.cs" />
     <Compile Include="PlayerClasses\JumpAndFall.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="MoveTypeEnum.cs" />
@@ -97,6 +96,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="GameData\Enemys\" />
     <Folder Include="GameData\Images\" />
     <Folder Include="GameData\Player\" />
   </ItemGroup>

@@ -11,9 +11,11 @@ namespace Dream
 	{
 		public Image BugImage { get; set; }
 
-		public BugEnemy(Point location, List<Point> track) : base(location, track) 
+		public BugEnemy(Point location, List<Point> track, string pathToDirWithImages) : base(location, track) 
 		{
-			//TODO load Bug image and override Draw
+			BugImage = Image.FromFile(pathToDirWithImages + @"\Bug.png");
 		}
+
+		public override void Draw(Graphics graphics) => graphics.DrawImage(BugImage, Location);
 	}
 }
