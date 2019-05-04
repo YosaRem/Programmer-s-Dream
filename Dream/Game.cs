@@ -25,7 +25,7 @@ namespace Dream
 
 			CurrentGameInfo = new GameInfo();
 			CurrentLevel = new Level(GameFiles.CurrentLevel);
-			Player = new Player(CurrentLevel.StartPlayerLocation);
+			Player = new Player(CurrentLevel.LevelInform.StartPlayerLocation);
 			var timer = new Timer();		
 			timer.Interval = 10;
 
@@ -52,28 +52,28 @@ namespace Dream
 			KeyDown += (sender, args) =>
 			{
 				if (args.KeyCode == Keys.Up)
-					Player.ChangeMoveType(MoveType.Up, CurrentLevel.Platforms);
+					Player.ChangeMoveType(MoveType.Up, CurrentLevel.LevelInform.Platforms);
 				if (args.KeyCode == Keys.Right)
-					Player.ChangeMoveType(MoveType.Right, CurrentLevel.Platforms);
+					Player.ChangeMoveType(MoveType.Right, CurrentLevel.LevelInform.Platforms);
 				if (args.KeyCode == Keys.Left)
-					Player.ChangeMoveType(MoveType.Left, CurrentLevel.Platforms);
+					Player.ChangeMoveType(MoveType.Left, CurrentLevel.LevelInform.Platforms);
 				if (args.KeyCode == Keys.R)
 					ResetLevel();
 			};
 			KeyUp += (sender, args) =>
 			{
 				if(args.KeyCode == Keys.Right || args.KeyCode == Keys.Left)
-					Player.ChangeMoveType(MoveType.Stand, CurrentLevel.Platforms);
+					Player.ChangeMoveType(MoveType.Stand, CurrentLevel.LevelInform.Platforms);
 			};
 		}
 
 		public void TickCommands(Timer timer)
 		{
 			timer.Tick += (sender, args) => CurrentLevel.MoveEnemy();
-			timer.Tick += (sender, args) => Player.Move(CurrentLevel.Platforms);
+			timer.Tick += (sender, args) => Player.Move(CurrentLevel.LevelInform.Platforms);
 			timer.Tick += (sender, args) =>
 			{
-				var isPlayerOk = Player.IsPlayerAlive(CurrentLevel.Enemies);
+				var isPlayerOk = Player.IsPlayerAlive(CurrentLevel.LevelInform.Enemies);
 				if (!isPlayerOk)
 					CurrentGameInfo.IsPlayerAlive = false;
 			};
@@ -83,7 +83,7 @@ namespace Dream
 		public void ResetLevel()
 		{
 			CurrentLevel = new Level(GameFiles.CurrentLevel);
-			Player = new Player(CurrentLevel.StartPlayerLocation);
+			Player = new Player(CurrentLevel.LevelInform.StartPlayerLocation);
 			CurrentGameInfo.Reset();
 		}
 	}

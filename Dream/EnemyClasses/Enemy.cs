@@ -30,7 +30,7 @@ namespace Dream
 		{
 			var newX = TrackMove.RecalculateX(this);
 			var newY = TrackMove.RecalculateY(this);
-			if (newX == Location.Left && newY == Location.Top)
+			if (newX == Track[CurrentDestinationPoint].X && newY == Track[CurrentDestinationPoint].Y)
 				CurrentDestinationPoint = ((CurrentDestinationPoint + Track.Count + 1) % Track.Count);
 			Location = new Rectangle(newX, newY, 25, 25);
 		}

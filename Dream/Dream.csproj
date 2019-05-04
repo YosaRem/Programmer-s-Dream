@@ -53,6 +53,7 @@
     <Compile Include="Ads.cs" />
     <Compile Include="BonusClasses\Bonus.cs" />
     <Compile Include="BonusClasses\Weapon.cs" />
+    <Compile Include="LevelClasses\LevelInformationExtractor.cs" />
     <Compile Include="GamesFiles.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="EnemyClasses\BugEnemy.cs" />
@@ -63,9 +64,10 @@
     </Compile>
     <Compile Include="EnemyClasses\Enemy.cs" />
     <Compile Include="GameInfo.cs" />
+    <Compile Include="LevelClasses\LevelInformation.cs" />
     <Compile Include="PlayerClasses\JumpAndFall.cs" />
-    <Compile Include="Level.cs" />
-    <Compile Include="MoveTypeEnum.cs" />
+    <Compile Include="LevelClasses\Level.cs" />
+    <Compile Include="PlayerClasses\MoveTypeEnum.cs" />
     <Compile Include="PlayerClasses\Player.cs" />
     <Compile Include="PlayerClasses\PlayerAnimation.cs" />
     <Compile Include="PlayerClasses\PossibilityMove.cs" />
