@@ -9,18 +9,17 @@ namespace Dream
 {
     public class Mark
     {
-        public Point StartPoint { get; set; }
-        public Point EndPoint { get; set; }
+        public Rectangle Location { get; set; }
+        public MarkEnum MarkType { get; set; }
 
         public Mark(Point start, Point end)
         {
-            StartPoint = start;
-            EndPoint = end;
+            Location = new Rectangle(start.X, start.Y, 1, end.Y - start.Y);
         }
 
         public virtual void Draw(Graphics graphics)
         {
-            
+            graphics.DrawRectangle(new Pen(Color.Brown, 2), Location);
         }
     }
 }

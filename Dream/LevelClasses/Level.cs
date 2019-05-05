@@ -13,20 +13,24 @@ namespace Dream
         public LevelFiles Files { get; private set; }
 		public LevelInformation LevelInform { get; private set; }
 		public Player Player { get; set; }
+		private GameInfo GameStat { get; set; }
 
 		public Level(LevelFiles files)
 		{
 			Files = files;
 			LevelInform = new LevelInformation(Files);
-			LevelInform.ExtractLevelFromFile();
 			Player = new Player(LevelInform.StartPlayerLocation);
+			GameStat = new GameInfo();
 		}
 
 		public void Move()
 		{
-			foreach (var enemy in LevelInform.Enemies)
-				enemy.Move();
-			Player.Move(LevelInform.Platforms);
+			if (GameStat.CanGameContinue())
+			{
+				foreach (var enemy in LevelInform.Enemies)
+					enemy.Move();
+				Player.Move(LevelInform.Platforms);
+			}
 		}
 
 		public void DrawLavel(Graphics graphics)
@@ -38,8 +42,22 @@ namespace Dream
 			foreach (var enemy in LevelInform.Enemies)
 				enemy.Draw(graphics);
 			Player.DrawPlayer(graphics);
-			//foreach (var bonus in Marks)
-			//    bonus.Draw(graphics);
+			foreach (var mark in LevelInform.Marks)
+				mark.Draw(graphics);
+		}
+
+		public void TransformGameStat(GameInfo gameInfo)
+		{
+			gameInfo.IsPlayerAlive = Player.IsPlayerAlive(LevelInform.Enemies);
+			gameInfo.IsLevelCompleated = IsLevelCompeted();
+			GameStat = gameInfo;
+		}
+
+		private bool IsLevelCompeted()
+		{
+			if (Player.Location.IntersectsWith(LevelInform.LevelFinish))
+				return true;
+			return false;
 		}
 	}
 }

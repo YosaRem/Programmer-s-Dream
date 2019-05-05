@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Dream
 {
-	enum MarkEnum
+	public enum MarkEnum
 	{
+		BaseMark,
 		EndLevel,
 		GiveWepon
 	}

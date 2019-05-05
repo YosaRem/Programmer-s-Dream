@@ -27,6 +27,11 @@ namespace Dream
             CurrentLevel = Levels.Dequeue();
         }
 
+        public void NextLevel()
+        {
+            CurrentLevel = Levels.Dequeue();
+        }
+
         private string GetCurrentDirectory()
         {
             var location = Assembly.GetExecutingAssembly().Location;

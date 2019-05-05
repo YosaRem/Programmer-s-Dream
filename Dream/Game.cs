@@ -19,7 +19,7 @@ namespace Dream
 		{
 			GameFiles = new GamesFiles();
 			ClientSize = new Size(GameFiles.CurrentLevel.Background.Width,
-				GameFiles.CurrentLevel.Background.Height);
+								  GameFiles.CurrentLevel.Background.Height);
 			DoubleBuffered = true;
 
 			CurrentGameInfo = new GameInfo();
@@ -27,19 +27,19 @@ namespace Dream
 			var timer = new Timer();		
 			timer.Interval = 10;
 
-			
 			KeyPressing();
 			TickCommands(timer);
 			timer.Start();
 
 			Paint += (sender, args) =>
 			{
-				if (CurrentGameInfo.IsPlayerAlive)
+				if (CurrentGameInfo.IsLevelCompleated)
+					Ads.LevelCompleted(args.Graphics);
+				else if (CurrentGameInfo.IsPlayerAlive)
 				{
 					CurrentLevel.DrawLavel(args.Graphics);
 					CurrentLevel.Player.DrawPlayer(args.Graphics);
-				}
-				else
+				}else
 					Ads.YouDied(args.Graphics);
 			};
 		}
@@ -56,6 +56,11 @@ namespace Dream
 					CurrentLevel.Player.ChangeMoveType(MoveType.Left, CurrentLevel.LevelInform.Platforms);
 				if (args.KeyCode == Keys.R)
 					ResetLevel();
+				if (args.KeyCode == Keys.Space)
+				{
+					GameFiles.NextLevel();
+					CurrentLevel = new Level(GameFiles.CurrentLevel);
+				}
 			};
 			KeyUp += (sender, args) =>
 			{
@@ -67,13 +72,7 @@ namespace Dream
 		public void TickCommands(Timer timer)
 		{
 			timer.Tick += (sender, args) => CurrentLevel.Move();
-			timer.Tick += (sender, args) => CurrentLevel.Player.Move(CurrentLevel.LevelInform.Platforms);
-			timer.Tick += (sender, args) =>
-			{
-				var isPlayerOk = CurrentLevel.Player.IsPlayerAlive(CurrentLevel.LevelInform.Enemies);
-				if (!isPlayerOk)
-					CurrentGameInfo.IsPlayerAlive = false;
-			};
+			timer.Tick += (sender, args) => CurrentLevel.TransformGameStat(CurrentGameInfo);
 			timer.Tick += (sender, args) => Invalidate();
 		}
 

@@ -11,9 +11,7 @@ namespace Dream
 	{
 		public EndLevel(Point start, Point end) : base(start, end)
 		{
-
+			MarkType = MarkEnum.EndLevel;
 		}
-
-
 	}
 }
