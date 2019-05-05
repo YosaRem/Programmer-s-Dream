@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Dream
 {
-    public class Bonus
+    public class Mark
     {
         public Point StartPoint { get; set; }
         public Point EndPoint { get; set; }
 
-        public Bonus(Point start, Point end)
+        public Mark(Point start, Point end)
         {
             StartPoint = start;
             EndPoint = end;

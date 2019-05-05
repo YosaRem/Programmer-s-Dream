@@ -51,7 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ads.cs" />
-    <Compile Include="BonusClasses\Bonus.cs" />
+    <Compile Include="BonusClasses\EndLevel.cs" />
+    <Compile Include="BonusClasses\Mark.cs" />
+    <Compile Include="BonusClasses\MarkEnum.cs" />
     <Compile Include="BonusClasses\Weapon.cs" />
     <Compile Include="LevelClasses\LevelInformationExtractor.cs" />
     <Compile Include="GamesFiles.cs" />

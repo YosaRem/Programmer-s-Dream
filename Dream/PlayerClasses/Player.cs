@@ -11,11 +11,11 @@ namespace Dream
 	public class Player
 	{
 		public Rectangle Location { get; set; }
-		public MoveType CurrentTypeMovement { get; set; }
-		public JumpAndFall JumpAbility { get; set; }
-		public RightAndLeft GoAbility { get; set; }
-		public PossibilityMove PossibilityMove { get; set; }
-		public PlayerAnimation Animation { get; set; }
+		public MoveType CurrentTypeMovement { get; private set; }
+		public JumpAndFall JumpAbility { get; private set; }
+		private RightAndLeft GoAbility { get; set; }
+		private PossibilityMove PossibilityMove { get; set; }
+		private PlayerAnimation Animation { get; set; }
 
 		public Player(Point startLocation)
 		{			

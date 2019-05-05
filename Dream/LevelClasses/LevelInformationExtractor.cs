@@ -24,7 +24,7 @@ namespace Dream
 				["PLE"] = ExtractPlayer,
 				["BUG"] = ExtractBugEnemy,
 				["RTE"] = ExtractRunTimeEnemy,
-				["MAR"] = ExtractMark
+				["END"] = ExtractEndMark
 			};
 		}
 
@@ -80,12 +80,12 @@ namespace Dream
 			LevelInform.Enemies.Add(new RunTimeEnemy(location, track, Files.EnemyImagesPath));
 		}
 
-		private void ExtractMark(string line)
+		private void ExtractEndMark(string line)
 		{
 			var splitLine = line.Split(' ');
 			var start = new Point(Convert.ToInt32(splitLine[1]), Convert.ToInt32(splitLine[2]));
 			var end = new Point(Convert.ToInt32(splitLine[3]), Convert.ToInt32(splitLine[4]));
-			LevelInform.Bonuses.Add(new Bonus(start, end));
+			LevelInform.Marks.Add(new EndLevel(start, end));
 		}
 
 		private List<Point> ParseTrack(string[] line)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dream.BonusClasses
 {
-    public class Weapon : Bonus
+    public class Weapon : Mark
     {
         public Image Image { get; set; }
 

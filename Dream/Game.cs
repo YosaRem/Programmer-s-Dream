@@ -12,7 +12,6 @@ namespace Dream
 	public class Game : Form
 	{
 		public GameInfo CurrentGameInfo { get; set; }
-		public Player Player { get; set; }
 		public Level CurrentLevel { get; set; }
         public GamesFiles GameFiles { get; set; }
 
@@ -25,7 +24,6 @@ namespace Dream
 
 			CurrentGameInfo = new GameInfo();
 			CurrentLevel = new Level(GameFiles.CurrentLevel);
-			Player = new Player(CurrentLevel.LevelInform.StartPlayerLocation);
 			var timer = new Timer();		
 			timer.Interval = 10;
 
@@ -39,11 +37,10 @@ namespace Dream
 				if (CurrentGameInfo.IsPlayerAlive)
 				{
 					CurrentLevel.DrawLavel(args.Graphics);
-					Player.DrawPlayer(args.Graphics);
+					CurrentLevel.Player.DrawPlayer(args.Graphics);
 				}
 				else
 					Ads.YouDied(args.Graphics);
-
 			};
 		}
 
@@ -52,28 +49,28 @@ namespace Dream
 			KeyDown += (sender, args) =>
 			{
 				if (args.KeyCode == Keys.Up)
-					Player.ChangeMoveType(MoveType.Up, CurrentLevel.LevelInform.Platforms);
+					CurrentLevel.Player.ChangeMoveType(MoveType.Up, CurrentLevel.LevelInform.Platforms);
 				if (args.KeyCode == Keys.Right)
-					Player.ChangeMoveType(MoveType.Right, CurrentLevel.LevelInform.Platforms);
+					CurrentLevel.Player.ChangeMoveType(MoveType.Right, CurrentLevel.LevelInform.Platforms);
 				if (args.KeyCode == Keys.Left)
-					Player.ChangeMoveType(MoveType.Left, CurrentLevel.LevelInform.Platforms);
+					CurrentLevel.Player.ChangeMoveType(MoveType.Left, CurrentLevel.LevelInform.Platforms);
 				if (args.KeyCode == Keys.R)
 					ResetLevel();
 			};
 			KeyUp += (sender, args) =>
 			{
 				if(args.KeyCode == Keys.Right || args.KeyCode == Keys.Left)
-					Player.ChangeMoveType(MoveType.Stand, CurrentLevel.LevelInform.Platforms);
+					CurrentLevel.Player.ChangeMoveType(MoveType.Stand, CurrentLevel.LevelInform.Platforms);
 			};
 		}
 
 		public void TickCommands(Timer timer)
 		{
-			timer.Tick += (sender, args) => CurrentLevel.MoveEnemy();
-			timer.Tick += (sender, args) => Player.Move(CurrentLevel.LevelInform.Platforms);
+			timer.Tick += (sender, args) => CurrentLevel.Move();
+			timer.Tick += (sender, args) => CurrentLevel.Player.Move(CurrentLevel.LevelInform.Platforms);
 			timer.Tick += (sender, args) =>
 			{
-				var isPlayerOk = Player.IsPlayerAlive(CurrentLevel.LevelInform.Enemies);
+				var isPlayerOk = CurrentLevel.Player.IsPlayerAlive(CurrentLevel.LevelInform.Enemies);
 				if (!isPlayerOk)
 					CurrentGameInfo.IsPlayerAlive = false;
 			};
@@ -83,7 +80,7 @@ namespace Dream
 		public void ResetLevel()
 		{
 			CurrentLevel = new Level(GameFiles.CurrentLevel);
-			Player = new Player(CurrentLevel.LevelInform.StartPlayerLocation);
+			CurrentLevel.Player = new Player(CurrentLevel.LevelInform.StartPlayerLocation);
 			CurrentGameInfo.Reset();
 		}
 	}

@@ -12,7 +12,7 @@ namespace Dream
 		public Point StartPlayerLocation { get; set; }
 		public List<Enemy> Enemies { get; private set; }
 		public List<Rectangle> Platforms { get; private set; }
-		public List<Bonus> Bonuses { get; private set; }
+		public List<Mark> Marks { get; private set; }
 		private LevelFiles Files { get; set; }
 		private LevelInformationExtractor Extractor { get; set; }
 
@@ -21,7 +21,7 @@ namespace Dream
 			Files = files;
 			Enemies = new List<Enemy>();
 			Platforms = new List<Rectangle>();
-			Bonuses = new List<Bonus>();
+			Marks = new List<Mark>();
 			Extractor = new LevelInformationExtractor(this, files);
 			ExtractLevelFromFile();
 		}
