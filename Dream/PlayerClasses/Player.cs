@@ -13,9 +13,9 @@ namespace Dream
 		public Rectangle Location { get; set; }
 		public MoveType CurrentTypeMovement { get; private set; }
 		public JumpAndFall JumpAbility { get; private set; }
-		private RightAndLeft GoAbility { get; set; }
-		private PossibilityMove PossibilityMove { get; set; }
-		private PlayerAnimation Animation { get; set; }
+		public RightAndLeft GoAbility { get; set; }
+		public PossibilityMove PossibilityMove { get; set; }
+		public PlayerAnimation Animation { get; set; }
 
 		public Player(Point startLocation)
 		{			
@@ -51,12 +51,8 @@ namespace Dream
 		public bool IsPlayerAlive(List<Enemy> enemies)
 		{
 			foreach (var enemy in enemies)
-				if (enemy.Location.Left <= Location.Right
-				    && Location.Left <= enemy.Location.Right
-				    && enemy.Location.Top <= Location.Bottom
-				    && Location.Top <= enemy.Location.Bottom)
-					return false;
-				
+				if (Location.IntersectsWith(enemy.Location))
+					return false;			
 			return true;
 		}
 	}

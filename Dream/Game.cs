@@ -58,8 +58,11 @@ namespace Dream
 					ResetLevel();
 				if (args.KeyCode == Keys.Space)
 				{
-					GameFiles.NextLevel();
-					CurrentLevel = new Level(GameFiles.CurrentLevel);
+					if (CurrentGameInfo.IsLevelCompleated)
+					{
+						GameFiles.NextLevel();
+						CurrentLevel = new Level(GameFiles.CurrentLevel);
+					}
 				}
 			};
 			KeyUp += (sender, args) =>
