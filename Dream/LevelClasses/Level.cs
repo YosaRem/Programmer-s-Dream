@@ -33,7 +33,7 @@ namespace Dream
 			}
 		}
 
-		public void DrawLavel(Graphics graphics)
+		public void DrawLevel(Graphics graphics)
 		{
             var brush = new SolidBrush(Color.DarkSlateGray);
             graphics.DrawImage(Files.Background, new Point(0, 0));

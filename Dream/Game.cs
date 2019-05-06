@@ -37,7 +37,7 @@ namespace Dream
 					Ads.LevelCompleted(args.Graphics);
 				else if (CurrentGameInfo.IsPlayerAlive)
 				{
-					CurrentLevel.DrawLavel(args.Graphics);
+					CurrentLevel.DrawLevel(args.Graphics);
 					CurrentLevel.Player.DrawPlayer(args.Graphics);
 				}else
 					Ads.YouDied(args.Graphics);

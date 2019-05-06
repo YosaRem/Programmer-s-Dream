@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ads.cs" />
+    <Compile Include="LevelClasses\Extractor_Test.cs" />
     <Compile Include="MarkClasses\EndLevel.cs" />
     <Compile Include="MarkClasses\Mark.cs" />
     <Compile Include="MarkClasses\MarkEnum.cs" />

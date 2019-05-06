@@ -10,9 +10,9 @@ namespace Dream
 {
 	public class LevelInformationExtractor
 	{
-		private LevelInformation LevelInform { get; set; }
-		private LevelFiles Files { get; set; }
-		private Dictionary<string, Action<string>> LineParser { get; set; }
+		public LevelInformation LevelInform { get; set; }
+		public LevelFiles Files { get; set; }
+		public Dictionary<string, Action<string>> LineParser { get; set; }
 
 		public LevelInformationExtractor(LevelInformation level, LevelFiles files)
 		{
@@ -41,7 +41,8 @@ namespace Dream
 				}
 				catch
 				{
-					throw new Exception("Can's cast file with level in line - " + line);
+                    throw new Exception();
+					//throw new Exception("Can's cast file with level in line - " + line);
 				}
 
 				line = level.ReadLine();

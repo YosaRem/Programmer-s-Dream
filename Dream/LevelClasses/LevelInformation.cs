@@ -15,7 +15,7 @@ namespace Dream
 		public List<Mark> Marks { get; private set; }
 		public Rectangle LevelFinish { get; set; }
 		private LevelFiles Files { get; set; }
-		private LevelInformationExtractor Extractor { get; set; }
+		public LevelInformationExtractor Extractor { get; set; }
 
 		public LevelInformation(LevelFiles files)
 		{
