@@ -11,31 +11,24 @@ namespace Dream
 	public class Player
 	{
 		public Rectangle Location { get; set; }
-		private Dictionary<MoveType, Action<Player, Graphics>> MovementSet { get; set; }
-		public MoveType CurrentTypeMovement { get; set; }
-		public JumpAndFall JumpAbility { get; set; }
+		public MoveType CurrentTypeMovement { get; private set; }
+		public JumpAndFall JumpAbility { get; private set; }
 		public RightAndLeft GoAbility { get; set; }
 		public PossibilityMove PossibilityMove { get; set; }
+		public PlayerAnimation Animation { get; set; }
 
 		public Player(Point startLocation)
-		{
-			MovementSet = new Dictionary<MoveType, Action<Player, Graphics>>
-			{
-				[MoveType.Down] = PlayerAnimation.Fall,
-				[MoveType.Up] = PlayerAnimation.Jump,
-				[MoveType.Right] = PlayerAnimation.GoRight,
-				[MoveType.Left] = PlayerAnimation.GoLeft,
-				[MoveType.Stand] = PlayerAnimation.Stand
-			};
-
+		{			
+			Animation = new PlayerAnimation();
 			PossibilityMove = new PossibilityMove();
-			Location = new Rectangle(startLocation, new Size(25, 25));
+			var PlayerSize = Image.FromFile(GamesFiles.PlayerImages + @"\Stand\0.png").Size;
+			Location = new Rectangle(startLocation, PlayerSize);
 			CurrentTypeMovement = MoveType.Stand;
-			JumpAbility = new JumpAndFall(50, 2);
+			JumpAbility = new JumpAndFall();
 			GoAbility = new RightAndLeft();
 		}
 
-		public void DrawPlayer(Graphics graphics) => MovementSet[CurrentTypeMovement](this, graphics);
+		public void DrawPlayer(Graphics graphics) => Animation.MovementSet[CurrentTypeMovement](this, graphics);
 
 		public void ChangeMoveType(MoveType newMove, List<Rectangle> platforms)
 		{
@@ -58,10 +51,8 @@ namespace Dream
 		public bool IsPlayerAlive(List<Enemy> enemies)
 		{
 			foreach (var enemy in enemies)
-				return !(enemy.Location.Left <= Location.Right
-				        && Location.Left <= enemy.Location.Right
-				        && enemy.Location.Top <= Location.Bottom
-				        && Location.Top <= enemy.Location.Bottom);
+				if (Location.IntersectsWith(enemy.Location))
+					return false;			
 			return true;
 		}
 	}

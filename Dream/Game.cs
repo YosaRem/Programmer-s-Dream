@@ -12,35 +12,35 @@ namespace Dream
 	public class Game : Form
 	{
 		public GameInfo CurrentGameInfo { get; set; }
-		public Player Player { get; set; }
 		public Level CurrentLevel { get; set; }
+        public GamesFiles GameFiles { get; set; }
 
 		public Game()
 		{
-			ClientSize = new Size(800, 600);
+			GameFiles = new GamesFiles();
+			ClientSize = new Size(GameFiles.CurrentLevel.Background.Width,
+								  GameFiles.CurrentLevel.Background.Height);
 			DoubleBuffered = true;
 
 			CurrentGameInfo = new GameInfo();
-			CurrentLevel = new Level();
-			Player = new Player(CurrentLevel.StartPlayerLocation);
+			CurrentLevel = new Level(GameFiles.CurrentLevel);
 			var timer = new Timer();		
-			timer.Interval = 1;
+			timer.Interval = 10;
 
-			
 			KeyPressing();
 			TickCommands(timer);
 			timer.Start();
 
 			Paint += (sender, args) =>
 			{
-				if (CurrentGameInfo.IsPlayerAlive)
+				if (CurrentGameInfo.IsLevelCompleated)
+					Ads.LevelCompleted(args.Graphics);
+				else if (CurrentGameInfo.IsPlayerAlive)
 				{
-					CurrentLevel.DrawLavel(args.Graphics);
-					Player.DrawPlayer(args.Graphics);
-				}
-				else
+					CurrentLevel.DrawLevel(args.Graphics);
+					CurrentLevel.Player.DrawPlayer(args.Graphics);
+				}else
 					Ads.YouDied(args.Graphics);
-
 			};
 		}
 
@@ -49,38 +49,40 @@ namespace Dream
 			KeyDown += (sender, args) =>
 			{
 				if (args.KeyCode == Keys.Up)
-					Player.ChangeMoveType(MoveType.Up, CurrentLevel.Platforms);
+					CurrentLevel.Player.ChangeMoveType(MoveType.Up, CurrentLevel.LevelInform.Platforms);
 				if (args.KeyCode == Keys.Right)
-					Player.ChangeMoveType(MoveType.Right, CurrentLevel.Platforms);
+					CurrentLevel.Player.ChangeMoveType(MoveType.Right, CurrentLevel.LevelInform.Platforms);
 				if (args.KeyCode == Keys.Left)
-					Player.ChangeMoveType(MoveType.Left, CurrentLevel.Platforms);
+					CurrentLevel.Player.ChangeMoveType(MoveType.Left, CurrentLevel.LevelInform.Platforms);
 				if (args.KeyCode == Keys.R)
 					ResetLevel();
+				if (args.KeyCode == Keys.Space)
+				{
+					if (CurrentGameInfo.IsLevelCompleated)
+					{
+						GameFiles.NextLevel();
+						CurrentLevel = new Level(GameFiles.CurrentLevel);
+					}
+				}
 			};
 			KeyUp += (sender, args) =>
 			{
 				if(args.KeyCode == Keys.Right || args.KeyCode == Keys.Left)
-					Player.ChangeMoveType(MoveType.Stand, CurrentLevel.Platforms);
+					CurrentLevel.Player.ChangeMoveType(MoveType.Stand, CurrentLevel.LevelInform.Platforms);
 			};
 		}
 
 		public void TickCommands(Timer timer)
 		{
-			timer.Tick += (sender, args) => CurrentLevel.MoveEnemy();
-			timer.Tick += (sender, args) => Player.Move(CurrentLevel.Platforms);
-			timer.Tick += (sender, args) =>
-			{
-				var isPlayerOk = Player.IsPlayerAlive(CurrentLevel.Enemies);
-				if (!isPlayerOk)
-					CurrentGameInfo.IsPlayerAlive = false;
-			};
+			timer.Tick += (sender, args) => CurrentLevel.Move();
+			timer.Tick += (sender, args) => CurrentLevel.TransformGameStat(CurrentGameInfo);
 			timer.Tick += (sender, args) => Invalidate();
 		}
 
 		public void ResetLevel()
 		{
-			CurrentLevel = new Level();
-			Player = new Player(CurrentLevel.StartPlayerLocation);
+			CurrentLevel = new Level(GameFiles.CurrentLevel);
+			CurrentLevel.Player = new Player(CurrentLevel.LevelInform.StartPlayerLocation);
 			CurrentGameInfo.Reset();
 		}
 	}

@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit.3.11.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" />
+  <Import Project="..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,6 +15,8 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
@@ -51,6 +58,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ads.cs" />
+    <Compile Include="LevelClasses\Extractor_Test.cs" />
+    <Compile Include="MarkClasses\EndLevel.cs" />
+    <Compile Include="MarkClasses\Mark.cs" />
+    <Compile Include="MarkClasses\MarkEnum.cs" />
+    <Compile Include="MarkClasses\Weapon.cs" />
+    <Compile Include="LevelClasses\LevelInformationExtractor.cs" />
+    <Compile Include="GamesFiles.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="EnemyClasses\BugEnemy.cs" />
     <Compile Include="EnemyClasses\RunTimeEnemy.cs" />
@@ -60,14 +74,15 @@
     </Compile>
     <Compile Include="EnemyClasses\Enemy.cs" />
     <Compile Include="GameInfo.cs" />
-    <Compile Include="ILevel.cs" />
-    <Compile Include="InformationForGame.cs" />
+    <Compile Include="LevelClasses\LevelInformation.cs" />
+    <Compile Include="PlayerClasses\IsPlayerAlive_Test.cs" />
     <Compile Include="PlayerClasses\JumpAndFall.cs" />
-    <Compile Include="Level.cs" />
-    <Compile Include="MoveTypeEnum.cs" />
+    <Compile Include="LevelClasses\Level.cs" />
+    <Compile Include="PlayerClasses\MoveTypeEnum.cs" />
     <Compile Include="PlayerClasses\Player.cs" />
     <Compile Include="PlayerClasses\PlayerAnimation.cs" />
     <Compile Include="PlayerClasses\PossibilityMove.cs" />
+    <Compile Include="PlayerClasses\PossibilityMove_Test.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PlayerClasses\RightAndLeft.cs" />
@@ -81,6 +96,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -95,12 +111,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
+    <Folder Include="GameData\Enemys\" />
+    <Folder Include="GameData\Images\" />
+    <Folder Include="GameData\Player\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Leveles\3_HardCode.txt" />
-    <Content Include="Leveles\1_HelloWorld.txt" />
-    <Content Include="Leveles\2_IndianCode.txt" />
+    <Content Include="GameData\Leveles\0.txt" />
+    <Content Include="GameData\Leveles\1.txt" />
+    <Content Include="GameData\Leveles\2.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props'))" />
+    <Error Condition="!Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.11.0\build\NUnit.props'))" />
+  </Target>
 </Project>

@@ -10,20 +10,12 @@ namespace Dream
 	{
 		public bool IsJumping { get; set; }
 		public bool IsFalling { get; set; }
-		private int MaxJumpHeight { get; set; }
 		public int CurrentJumpHeight { get; set; }
 		public int JumpCount { get; set; }
-		private int MaxJumpCount { get; set; }
-
-		public JumpAndFall(int maxHeight, int maxJumpCount)
-		{
-			MaxJumpCount = maxJumpCount;
-			MaxJumpHeight = maxHeight;
-		}
 
 		public void Jump()
 		{
-			if (JumpCount < MaxJumpCount)
+			if (JumpCount < Config.MaxJumpCount)
 			{
 				JumpCount++;
 				CurrentJumpHeight = 0;
@@ -41,7 +33,7 @@ namespace Dream
 				JumpCount = 0;
 				return possibility.Floor.Value.Top - player.Location.Height;
 			}			
-			if(CurrentJumpHeight >= MaxJumpHeight)
+			if(CurrentJumpHeight >= Config.MaxJumpHeight)
 			{
 				CurrentJumpHeight = 0;
 				IsJumping = false;

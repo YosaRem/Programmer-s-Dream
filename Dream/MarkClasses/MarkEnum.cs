@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Dream
 {
-	public class InformationForGame
+	public enum MarkEnum
 	{
-		public static string Stand = @"C:\Users\Yosa Rem\source\repos\Dream\Dream\Sprites\Player\Stand";
+		BaseMark,
+		EndLevel,
+		GiveWepon
 	}
 }

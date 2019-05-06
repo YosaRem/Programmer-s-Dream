@@ -22,5 +22,10 @@ namespace Dream
 			IsPlayerAlive = true;
 			IsLevelCompleated = false;
 		}
+
+		public bool CanGameContinue()
+		{
+			return IsPlayerAlive && !IsLevelCompleated;
+		}
 	}
 }
