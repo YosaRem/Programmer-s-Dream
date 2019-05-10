@@ -33,19 +33,6 @@ namespace Dream
 			}
 		}
 
-		public void DrawLevel(Graphics graphics)
-		{
-            var brush = new SolidBrush(Color.DarkSlateGray);
-            graphics.DrawImage(Files.Background, new Point(0, 0));
-		    foreach (var platform in LevelInform.Platforms)
-		        graphics.FillRectangle(brush, platform);
-			foreach (var enemy in LevelInform.Enemies)
-				enemy.Draw(graphics);
-			Player.DrawPlayer(graphics);
-			foreach (var mark in LevelInform.Marks)
-				mark.Draw(graphics);
-		}
-
 		public void TransformGameStat(GameInfo gameInfo)
 		{
 			gameInfo.IsPlayerAlive = Player.IsPlayerAlive(LevelInform.Enemies);

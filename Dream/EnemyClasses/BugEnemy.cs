@@ -9,13 +9,9 @@ namespace Dream
 {
 	public class BugEnemy : Enemy
 	{
-		public Image BugImage { get; set; }
-
-		public BugEnemy(Point location, List<Point> track, string pathToDirWithImages) : base(location, track) 
+		public BugEnemy(Point location, List<Point> track) : base(location, track)
 		{
-			BugImage = Image.FromFile(pathToDirWithImages + @"\Bug.png");
+			TypeEnemy = EnemyType.Bug;
 		}
-
-		public override void Draw(Graphics graphics) => graphics.DrawImage(BugImage, Location);
 	}
 }

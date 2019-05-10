@@ -12,10 +12,6 @@ namespace Dream
 	public class PlayerAnimation
 	{
 		public Dictionary<MoveType, Action<Player, Graphics>> MovementSet { get; private set; }
-		private List<Image> runFrames = new List<Image>();
-		private List<Image> jumpFrames = new List<Image>();
-		private List<Image> fallFrames = new List<Image>();
-		private List<Image> standFrames = new List<Image>();
 		private Func<int, int, int> RecalculateCount;
 		private int runFrameCount;
 		private int jumpFrameCount;

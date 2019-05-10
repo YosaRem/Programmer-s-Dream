@@ -15,11 +15,9 @@ namespace Dream
 		public JumpAndFall JumpAbility { get; private set; }
 		public RightAndLeft GoAbility { get; set; }
 		public PossibilityMove PossibilityMove { get; set; }
-		public PlayerAnimation Animation { get; set; }
 
 		public Player(Point startLocation)
-		{			
-			Animation = new PlayerAnimation();
+		{		
 			PossibilityMove = new PossibilityMove();
 			var PlayerSize = Image.FromFile(GamesFiles.PlayerImages + @"\Stand\0.png").Size;
 			Location = new Rectangle(startLocation, PlayerSize);
@@ -27,8 +25,6 @@ namespace Dream
 			JumpAbility = new JumpAndFall();
 			GoAbility = new RightAndLeft();
 		}
-
-		public void DrawPlayer(Graphics graphics) => Animation.MovementSet[CurrentTypeMovement](this, graphics);
 
 		public void ChangeMoveType(MoveType newMove, List<Rectangle> platforms)
 		{

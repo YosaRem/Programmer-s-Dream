@@ -12,14 +12,12 @@ namespace Dream
     public class GamesFiles
     {
         private string CurrentDirectory { get; set; }
-        public static string PlayerImages { get; set; }
         public Queue<LevelFiles> Levels { get; set; }
         public LevelFiles CurrentLevel { get; set; }
 
         public GamesFiles()
         {
             CurrentDirectory = GetCurrentDirectory();
-            PlayerImages = CurrentDirectory + @"\Player";
             Levels = new Queue<LevelFiles>();
 			var quantityLevel = new DirectoryInfo(CurrentDirectory + @"\Leveles").GetFiles().Length;
             for (var i = 0; i < quantityLevel; i++)

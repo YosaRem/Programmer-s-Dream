@@ -12,6 +12,7 @@ namespace Dream
 		public Rectangle Location { get; set; }
 		public List<Point> Track { get; set; }
 		public int CurrentDestinationPoint { get; set; }
+		public EnemyType TypeEnemy { get; set; }
 
 		public Enemy(Point location, List<Point> track)
 		{

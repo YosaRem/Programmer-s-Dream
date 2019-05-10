@@ -41,8 +41,7 @@ namespace Dream
 				}
 				catch
 				{
-                    throw new Exception();
-					//throw new Exception("Can's cast file with level in line - " + line);
+					throw new Exception("Can's cast file with level in line - " + line);
 				}
 
 				line = level.ReadLine();
@@ -70,7 +69,7 @@ namespace Dream
 			var splitLine = line.Split(' ');
 			var location = new Point(Convert.ToInt32(splitLine[1]), Convert.ToInt32(splitLine[2]));
 			var track = ParseTrack(splitLine);
-			LevelInform.Enemies.Add(new BugEnemy(location, track, Files.EnemyImagesPath));
+			LevelInform.Enemies.Add(new BugEnemy(location, track));
 		}
 
 		private void ExtractRunTimeEnemy(string line)

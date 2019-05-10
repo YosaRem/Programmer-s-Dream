@@ -57,14 +57,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ads.cs" />
+    <Compile Include="Drawer\Ads.cs" />
+    <Compile Include="Drawer\Drawer.cs" />
+    <Compile Include="Drawer\EnemyDrawer.cs" />
+    <Compile Include="EnemyClasses\EnemyEnum.cs" />
+    <Compile Include="FileManadger\FileStorage.cs" />
+    <Compile Include="FileManadger\PlayerImages.cs" />
     <Compile Include="LevelClasses\Extractor_Test.cs" />
     <Compile Include="MarkClasses\EndLevel.cs" />
     <Compile Include="MarkClasses\Mark.cs" />
     <Compile Include="MarkClasses\MarkEnum.cs" />
     <Compile Include="MarkClasses\Weapon.cs" />
     <Compile Include="LevelClasses\LevelInformationExtractor.cs" />
-    <Compile Include="GamesFiles.cs" />
+    <Compile Include="FileManadger\GamesFiles.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="EnemyClasses\BugEnemy.cs" />
     <Compile Include="EnemyClasses\RunTimeEnemy.cs" />
@@ -80,7 +85,7 @@
     <Compile Include="LevelClasses\Level.cs" />
     <Compile Include="PlayerClasses\MoveTypeEnum.cs" />
     <Compile Include="PlayerClasses\Player.cs" />
-    <Compile Include="PlayerClasses\PlayerAnimation.cs" />
+    <Compile Include="Drawer\PlayerAnimation.cs" />
     <Compile Include="PlayerClasses\PossibilityMove.cs" />
     <Compile Include="PlayerClasses\PossibilityMove_Test.cs" />
     <Compile Include="Program.cs" />
