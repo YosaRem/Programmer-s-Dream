@@ -60,6 +60,7 @@
     <Compile Include="Drawer\Ads.cs" />
     <Compile Include="Drawer\Drawer.cs" />
     <Compile Include="Drawer\EnemyDrawer.cs" />
+    <Compile Include="EnemyClasses\Boss.cs" />
     <Compile Include="EnemyClasses\EnemyEnum.cs" />
     <Compile Include="FileManadger\EnemyImages.cs" />
     <Compile Include="FileManadger\LevelFiles.cs" />

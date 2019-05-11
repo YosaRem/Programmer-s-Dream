@@ -9,8 +9,9 @@ namespace Dream
 {
 	public static class EnemyImages
 	{
-		public static Image BugImage { get; set; }
-		public static Image RunTimeImage { get; set; }
-		public static Image StyleImage { get; set; }
+		public static Image Bug { get; set; }
+		public static Image RunTime { get; set; }
+		public static Image Style { get; set; }
+		public static Image Boss { get; set; }
 	}
 }

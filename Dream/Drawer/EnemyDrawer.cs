@@ -17,13 +17,14 @@ namespace Dream
 			{
 				[EnemyType.Bug] = DrawBug,
 				[EnemyType.RunTime] = DrawRunTime,
-				[EnemyType.Style] = DrawStyle
+				[EnemyType.Style] = DrawStyle,
+				[EnemyType.Boss] = DrawBoss
 			};
 		}
 
 		private void DrawBug(Enemy enemy, Graphics graphics)
 		{
-			graphics.DrawImage(EnemyImages.BugImage, enemy.Location);
+			graphics.DrawImage(EnemyImages.Bug, enemy.Location);
 		}
 
 		private void DrawRunTime(Enemy enemy, Graphics graphics)
@@ -35,7 +36,12 @@ namespace Dream
 				runTime.Leap = 0;
 			}
 			runTime.Leap++;
-			graphics.DrawImage(EnemyImages.RunTimeImage, enemy.Location);
+			graphics.DrawImage(EnemyImages.RunTime, enemy.Location);
+		}
+
+		private void DrawBoss(Enemy enemy, Graphics graphics)
+		{
+			graphics.DrawImage(EnemyImages.Boss, enemy.Location);
 		}
 
 		private void DrawStyle(Enemy enemy, Graphics graphics)

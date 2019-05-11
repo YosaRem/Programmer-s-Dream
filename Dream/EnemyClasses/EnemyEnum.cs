@@ -10,6 +10,7 @@ namespace Dream
 	{
 		Bug,
 		RunTime,
-		Style
+		Style,
+		Boss
 	}
 }

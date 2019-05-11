@@ -16,7 +16,7 @@ namespace Dream
 
 		public Enemy(Point location, List<Point> track)
 		{
-			Location = new Rectangle(location.X, location.Y, 25, 25);
+			Location = new Rectangle(location.X, location.Y, EnemyImages.Bug.Width, EnemyImages.Bug.Height);
 			Track = track;
 			CurrentDestinationPoint = 0;
 		}
@@ -27,7 +27,7 @@ namespace Dream
 			var newY = this.RecalculateY();
 			if (newX == Track[CurrentDestinationPoint].X && newY == Track[CurrentDestinationPoint].Y)
 				CurrentDestinationPoint = ((CurrentDestinationPoint + Track.Count + 1) % Track.Count);
-			Location = new Rectangle(newX, newY, 25, 25);
+			Location = new Rectangle(newX, newY, Location.Width, Location.Height);
 		}
 	}
 }

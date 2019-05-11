@@ -12,7 +12,7 @@ namespace Dream
 	public class PlayerAnimation
 	{
 		public Dictionary<MoveType, Action<Player, Graphics>> MovementSet { get; private set; }
-		private Func<int, int, int> RecalculateCount;
+		private readonly Func<int, int, int> RecalculateCount;
 		private int runFrameCount;
 		private int jumpFrameCount;
 		private int fallFrameCount;
@@ -34,7 +34,7 @@ namespace Dream
 		public void Fall(Player player, Graphics graphics)
 		{
 			fallFrameCount = RecalculateCount(fallFrameCount, PlayerImages.fallFrames.Count);
-			var frame = PlayerImages.fallFrames[fallFrameCount];
+			var frame = (Image)PlayerImages.fallFrames[fallFrameCount].Clone();
 			if (player.CurrentTypeMovement == MoveType.Right)
 				graphics.DrawImage(frame, player.Location);
 			else
@@ -47,7 +47,7 @@ namespace Dream
 		public void Jump(Player player, Graphics graphics)
 		{
 			jumpFrameCount = RecalculateCount(jumpFrameCount, PlayerImages.jumpFrames.Count);
-			var frame = PlayerImages.jumpFrames[jumpFrameCount];
+			var frame = (Image)PlayerImages.jumpFrames[jumpFrameCount].Clone();
 			if(player.CurrentTypeMovement == MoveType.Right)
 				graphics.DrawImage(frame, player.Location);
 			else
@@ -80,7 +80,7 @@ namespace Dream
 			else
 			{
 				runFrameCount = RecalculateCount(runFrameCount, PlayerImages.runFrames.Count);
-				var frame = PlayerImages.runFrames[runFrameCount];
+				var frame = (Image)PlayerImages.runFrames[runFrameCount].Clone();
 				frame.RotateFlip(RotateFlipType.RotateNoneFlipX);
 				graphics.DrawImage(frame, player.Location);
 			}

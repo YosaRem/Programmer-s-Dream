@@ -42,7 +42,9 @@ namespace Dream
 
 		private bool IsLevelCompeted()
 		{
-			if (Player.Location.IntersectsWith(LevelInform.LevelFinish))
+			if (!(LevelInform.LevelBoss is null) && LevelInform.LevelBoss.Helth <= 0)
+				return true;
+			else if (Player.Location.IntersectsWith(LevelInform.LevelFinish))
 				return true;
 			return false;
 		}

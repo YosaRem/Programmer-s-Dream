@@ -65,6 +65,7 @@ namespace Dream
 			};
 			KeyUp += (sender, args) =>
 			{
+
 				if(args.KeyCode == Keys.Right || args.KeyCode == Keys.Left)
 					CurrentLevel.Player.ChangeMoveType(MoveType.Stand, CurrentLevel.LevelInform.Platforms);
 			};

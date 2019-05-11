@@ -40,10 +40,10 @@ namespace Dream
 		{
 			foreach (var platform in platforms)
 			{
-				if (player.Location.Right >= platform.Left
-					&& player.Location.Left <= platform.Right
-					&& player.Location.Top <= platform.Bottom
-					&& player.Location.Bottom >= platform.Bottom)
+				if (player.Location.Right > platform.Left
+					&& player.Location.Left < platform.Right
+					&& player.Location.Top < platform.Bottom
+					&& player.Location.Bottom > platform.Bottom)
 				{
 					Ceiling = platform;
 					return;

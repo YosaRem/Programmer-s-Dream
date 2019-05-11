@@ -27,7 +27,7 @@ namespace Dream
 			var newY = TrackMove.RecalculateY(this, Config.RunTimeEnemyMoveDelta);
 			if (newX == Track[CurrentDestinationPoint].X && newY == Track[CurrentDestinationPoint].Y)
 				CurrentDestinationPoint = ((CurrentDestinationPoint + Track.Count + 1) % Track.Count);
-			RecalculatedLocation = new Rectangle(newX, newY, 25, 25);
+			RecalculatedLocation = new Rectangle(newX, newY, Location.Width, Location.Height);
 		}
 	}
 }

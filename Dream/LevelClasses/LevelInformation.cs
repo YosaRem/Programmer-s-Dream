@@ -14,6 +14,7 @@ namespace Dream
 		public List<Rectangle> Platforms { get; private set; }
 		public List<Mark> Marks { get; private set; }
 		public Rectangle LevelFinish { get; set; }
+		public Boss LevelBoss { get; set; }
 		private LevelFiles Files { get; set; }
 		public LevelInformationExtractor Extractor { get; set; }
 
@@ -26,6 +27,7 @@ namespace Dream
 			Extractor = new LevelInformationExtractor(this, files);
 			ExtractLevelFromFile();
 			FindFinish();
+			FindBoss();
 		}
 
 		private void ExtractLevelFromFile() => Extractor.ExtractLevelFromFile();
@@ -37,6 +39,18 @@ namespace Dream
 				if (mark.MarkType == MarkEnum.EndLevel)
 				{
 					LevelFinish = mark.Location;
+					break;
+				}
+			}
+		}
+
+		private void FindBoss()
+		{
+			foreach (var enemy in Enemies)
+			{
+				if (enemy.TypeEnemy == EnemyType.Boss)
+				{
+					LevelBoss = (Boss) enemy;
 					break;
 				}
 			}

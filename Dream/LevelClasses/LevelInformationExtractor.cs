@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dream
 {
@@ -24,7 +21,8 @@ namespace Dream
 				["PLE"] = ExtractPlayer,
 				["BUG"] = ExtractBugEnemy,
 				["RTE"] = ExtractRunTimeEnemy,
-				["END"] = ExtractEndMark
+				["END"] = ExtractEndMark,
+				["BOS"] = ExtractBoss
 			};
 		}
 
@@ -86,6 +84,14 @@ namespace Dream
 			var start = new Point(Convert.ToInt32(splitLine[1]), Convert.ToInt32(splitLine[2]));
 			var end = new Point(Convert.ToInt32(splitLine[3]), Convert.ToInt32(splitLine[4]));
 			LevelInform.Marks.Add(new EndLevel(start, end));
+		}
+
+		private void ExtractBoss(string line)
+		{
+			var splitLine = line.Split(' ');
+			var location = new Point(Convert.ToInt32(splitLine[1]), Convert.ToInt32(splitLine[2]));
+			var track = ParseTrack(splitLine);
+			LevelInform.Enemies.Add(new Boss(location, track));
 		}
 
 		private List<Point> ParseTrack(string[] line)

@@ -41,9 +41,10 @@ namespace Dream
 
         private void ExtractEnemyImages()
         {
-            EnemyImages.BugImage = Image.FromFile(EnemyFilesPath + "Bug.png");
-            EnemyImages.RunTimeImage = Image.FromFile(EnemyFilesPath + "RT.png");
-            EnemyImages.StyleImage = Image.FromFile(EnemyFilesPath + "Style.png");
+            EnemyImages.Bug = Image.FromFile(EnemyFilesPath + "Bug.png");
+            EnemyImages.RunTime = Image.FromFile(EnemyFilesPath + "RT.png");
+            EnemyImages.Style = Image.FromFile(EnemyFilesPath + "Style.png");
+            EnemyImages.Boss = Image.FromFile(EnemyFilesPath + "Boss.png");
 		}
 
         private void FillPlayerImages()
