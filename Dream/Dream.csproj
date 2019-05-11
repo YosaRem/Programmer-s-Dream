@@ -61,7 +61,8 @@
     <Compile Include="Drawer\Drawer.cs" />
     <Compile Include="Drawer\EnemyDrawer.cs" />
     <Compile Include="EnemyClasses\EnemyEnum.cs" />
-    <Compile Include="FileManadger\FileStorage.cs" />
+    <Compile Include="FileManadger\EnemyImages.cs" />
+    <Compile Include="FileManadger\LevelFiles.cs" />
     <Compile Include="FileManadger\PlayerImages.cs" />
     <Compile Include="LevelClasses\Extractor_Test.cs" />
     <Compile Include="MarkClasses\EndLevel.cs" />

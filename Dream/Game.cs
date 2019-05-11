@@ -58,7 +58,7 @@ namespace Dream
 				{
 					if (CurrentGameInfo.IsLevelCompleated)
 					{
-						GameFiles.NextLevel();
+						GameFiles.GetNextLevel();
 						CurrentLevel = new Level(GameFiles.CurrentLevel);
 					}
 				}

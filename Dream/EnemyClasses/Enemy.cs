@@ -21,16 +21,10 @@ namespace Dream
 			CurrentDestinationPoint = 0;
 		}
 
-		public virtual void Draw(Graphics graphics)
-		{
-			graphics.DrawRectangle(new Pen(Color.Black, 1), Location.X, Location.Y,
-				Location.Width, Location.Height);
-		}	
-
 		public virtual void Move()
 		{
-			var newX = TrackMove.RecalculateX(this);
-			var newY = TrackMove.RecalculateY(this);
+			var newX = this.RecalculateX();
+			var newY = this.RecalculateY();
 			if (newX == Track[CurrentDestinationPoint].X && newY == Track[CurrentDestinationPoint].Y)
 				CurrentDestinationPoint = ((CurrentDestinationPoint + Track.Count + 1) % Track.Count);
 			Location = new Rectangle(newX, newY, 25, 25);

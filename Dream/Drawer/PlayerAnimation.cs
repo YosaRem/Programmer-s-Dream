@@ -29,13 +29,12 @@ namespace Dream
 				[MoveType.Stand] = Stand
 			};
 			RecalculateCount = (int x, int y) => ((x + y + 1) % (y));
-			ExtractFramesFromFolders();
 		}
 
 		public void Fall(Player player, Graphics graphics)
 		{
-			fallFrameCount = RecalculateCount(fallFrameCount, fallFrames.Count);
-			var frame = fallFrames[fallFrameCount];
+			fallFrameCount = RecalculateCount(fallFrameCount, PlayerImages.fallFrames.Count);
+			var frame = PlayerImages.fallFrames[fallFrameCount];
 			if (player.CurrentTypeMovement == MoveType.Right)
 				graphics.DrawImage(frame, player.Location);
 			else
@@ -47,8 +46,8 @@ namespace Dream
 
 		public void Jump(Player player, Graphics graphics)
 		{
-			jumpFrameCount = RecalculateCount(jumpFrameCount, jumpFrames.Count);
-			var frame = jumpFrames[jumpFrameCount];
+			jumpFrameCount = RecalculateCount(jumpFrameCount, PlayerImages.jumpFrames.Count);
+			var frame = PlayerImages.jumpFrames[jumpFrameCount];
 			if(player.CurrentTypeMovement == MoveType.Right)
 				graphics.DrawImage(frame, player.Location);
 			else
@@ -66,8 +65,8 @@ namespace Dream
 				Fall(player, graphics);
 			else
 			{
-				runFrameCount = RecalculateCount(runFrameCount, runFrames.Count);
-				graphics.DrawImage(runFrames[runFrameCount],
+				runFrameCount = RecalculateCount(runFrameCount, PlayerImages.runFrames.Count);
+				graphics.DrawImage(PlayerImages.runFrames[runFrameCount],
 					player.Location);
 			}
 		}
@@ -80,8 +79,8 @@ namespace Dream
 				Fall(player, graphics);
 			else
 			{
-				runFrameCount = RecalculateCount(runFrameCount, runFrames.Count);
-				var frame = runFrames[runFrameCount];
+				runFrameCount = RecalculateCount(runFrameCount, PlayerImages.runFrames.Count);
+				var frame = PlayerImages.runFrames[runFrameCount];
 				frame.RotateFlip(RotateFlipType.RotateNoneFlipX);
 				graphics.DrawImage(frame, player.Location);
 			}
@@ -89,25 +88,9 @@ namespace Dream
 
 		public void Stand(Player player, Graphics graphics)
 		{
-			standFrameCount = RecalculateCount(standFrameCount, standFrames.Count);
-			graphics.DrawImage(standFrames[standFrameCount],
+			standFrameCount = RecalculateCount(standFrameCount, PlayerImages.standFrames.Count);
+			graphics.DrawImage(PlayerImages.standFrames[standFrameCount],
 				player.Location);
-		}
-
-		private void ExtractFramesFromFolders()
-		{
-			var countFile = new DirectoryInfo(GamesFiles.PlayerImages + @"\Run").GetFiles().Length;
-			for (var i = 0; i < countFile; i++)
-				runFrames.Add(Image.FromFile(GamesFiles.PlayerImages + @"\Run\" + i.ToString() + ".png"));
-			countFile = new DirectoryInfo(GamesFiles.PlayerImages + @"\Fall").GetFiles().Length;
-			for (var i = 0; i < countFile; i++)
-				fallFrames.Add(Image.FromFile(GamesFiles.PlayerImages + @"\Fall\" + i.ToString() + ".png"));
-			countFile = new DirectoryInfo(GamesFiles.PlayerImages + @"\Jump").GetFiles().Length;
-			for (var i = 0; i < countFile; i++)
-				jumpFrames.Add(Image.FromFile(GamesFiles.PlayerImages + @"\Jump\" + i.ToString() + ".png"));
-			countFile = new DirectoryInfo(GamesFiles.PlayerImages + @"\Stand").GetFiles().Length;
-			for (var i = 0; i < countFile; i++)
-				standFrames.Add(Image.FromFile(GamesFiles.PlayerImages + @"\Stand\" + i.ToString() + ".png"));
 		}
 	}
 }

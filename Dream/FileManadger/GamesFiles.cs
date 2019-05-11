@@ -14,44 +14,54 @@ namespace Dream
         private string CurrentDirectory { get; set; }
         public Queue<LevelFiles> Levels { get; set; }
         public LevelFiles CurrentLevel { get; set; }
+        private string PlayerFilesPath { get; set; }
+        private string EnemyFilesPath { get; set; }
 
         public GamesFiles()
         {
-            CurrentDirectory = GetCurrentDirectory();
             Levels = new Queue<LevelFiles>();
-			var quantityLevel = new DirectoryInfo(CurrentDirectory + @"\Leveles").GetFiles().Length;
-            for (var i = 0; i < quantityLevel; i++)
-                Levels.Enqueue(new LevelFiles(CurrentDirectory, i));
+			CurrentDirectory = GetCurrentDirectory();
+            PlayerFilesPath = CurrentDirectory + @"Player\";
+            EnemyFilesPath = CurrentDirectory + @"Enemys\";
+            ExtractLevelFiles();
+            FillPlayerImages();
+			ExtractEnemyImages();
             CurrentLevel = Levels.Dequeue();
         }
 
-        public void NextLevel()
-        {
-            CurrentLevel = Levels.Dequeue();
-        }
+        public void GetNextLevel() => CurrentLevel = Levels.Dequeue();
 
         public string GetCurrentDirectory()
         {
             var location = Assembly.GetExecutingAssembly().Location;
             var path = Path.GetDirectoryName(location);
             var dir = Directory.GetParent(Directory.GetParent(path).ToString()).ToString();
-            return dir + @"\GameData";
+            return dir + @"\GameData\";
         }
-    }
 
-
-    public class LevelFiles
-    {
-        public Image Background;
-        public string EnemyImagesPath;
-        public string BonusImagesPath;
-        public string Path;
-
-        public LevelFiles(string dir, int levelNumber)
+        private void ExtractEnemyImages()
         {
-            Background = Image.FromFile(dir + @"\Images\background.JPG");
-            Path = dir + @"\Leveles\" + levelNumber.ToString() + ".txt";
-            EnemyImagesPath = dir + @"\Enemys";
-        }
+            EnemyImages.BugImage = Image.FromFile(EnemyFilesPath + "Bug.png");
+            EnemyImages.RunTimeImage = Image.FromFile(EnemyFilesPath + "RT.png");
+            EnemyImages.StyleImage = Image.FromFile(EnemyFilesPath + "Style.png");
+		}
+
+        private void FillPlayerImages()
+        {
+            var folders = new List<string>() { "Run", "Fall", "Jump", "Stand" };
+            foreach (var folder in folders)
+            {
+				var countFile = new DirectoryInfo(PlayerFilesPath + folder).GetFiles().Length;
+                for (var i = 0; i < countFile; i++)
+                    PlayerImages.frames[folder].Add(Image.FromFile(PlayerFilesPath + folder + "\\" + i.ToString() + ".png"));
+			}
+		}
+
+        private void ExtractLevelFiles()
+        {
+            var quantityLevel = new DirectoryInfo(CurrentDirectory + @"Leveles").GetFiles().Length;
+            for (var i = 0; i < quantityLevel; i++)
+                Levels.Enqueue(new LevelFiles(CurrentDirectory, i));
+		}
     }
 }

@@ -13,7 +13,12 @@ namespace Dream
 		public static List<Image> jumpFrames = new List<Image>();
 		public static List<Image> fallFrames = new List<Image>();
 		public static List<Image> standFrames = new List<Image>();
-
-
+		public static Dictionary<string, List<Image>> frames = new Dictionary<string, List<Image>>()
+		{
+			["Run"] = runFrames,
+			["Fall"] = fallFrames,
+			["Jump"] = jumpFrames,
+			["Stand"] = standFrames
+		};
 	}
 }

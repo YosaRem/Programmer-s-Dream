@@ -19,7 +19,7 @@ namespace Dream
 		public Player(Point startLocation)
 		{		
 			PossibilityMove = new PossibilityMove();
-			var PlayerSize = Image.FromFile(GamesFiles.PlayerImages + @"\Stand\0.png").Size;
+			var PlayerSize = PlayerImages.standFrames[0].Size;
 			Location = new Rectangle(startLocation, PlayerSize);
 			CurrentTypeMovement = MoveType.Stand;
 			JumpAbility = new JumpAndFall();

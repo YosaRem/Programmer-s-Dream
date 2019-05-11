@@ -23,12 +23,19 @@ namespace Dream
 
 		private void DrawBug(Enemy enemy, Graphics graphics)
 		{
-
+			graphics.DrawImage(EnemyImages.BugImage, enemy.Location);
 		}
 
 		private void DrawRunTime(Enemy enemy, Graphics graphics)
 		{
-
+			var runTime = (RunTimeEnemy) enemy;
+			if (runTime.Leap == Config.Leap)
+			{
+				runTime.Location = runTime.RecalculatedLocation;
+				runTime.Leap = 0;
+			}
+			runTime.Leap++;
+			graphics.DrawImage(EnemyImages.RunTimeImage, enemy.Location);
 		}
 
 		private void DrawStyle(Enemy enemy, Graphics graphics)

@@ -8,7 +8,7 @@ namespace Dream
 {
 	public static class TrackMove
 	{
-		public static int RecalculateX(Enemy enemy, int deltaMove = Config.EnemyDefautMoveDelta)
+		public static int RecalculateX(this Enemy enemy, int deltaMove = Config.EnemyDefautMoveDelta)
 		{
 			var delta = enemy.Track[enemy.CurrentDestinationPoint].X - enemy.Location.Left;
 			if (Math.Abs(delta) <= deltaMove)
@@ -18,7 +18,7 @@ namespace Dream
 				: enemy.Location.Left + deltaMove;
 		}
 
-		public static int RecalculateY(Enemy enemy, int deltaMove = Config.EnemyDefautMoveDelta)
+		public static int RecalculateY(this Enemy enemy, int deltaMove = Config.EnemyDefautMoveDelta)
 		{
 			var delta = enemy.Track[enemy.CurrentDestinationPoint].Y - enemy.Location.Top;
 			if (Math.Abs(delta) <= deltaMove)

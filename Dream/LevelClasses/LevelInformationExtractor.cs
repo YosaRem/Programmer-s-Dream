@@ -30,7 +30,7 @@ namespace Dream
 
 		public void ExtractLevelFromFile()
 		{
-			var level = new StreamReader(Files.Path);
+			var level = new StreamReader(Files.PathToLevelFile);
 			var line = level.ReadLine();
 			while (line != null)
 			{
@@ -77,7 +77,7 @@ namespace Dream
 			var splitLine = line.Split(' ');
 			var location = new Point(Convert.ToInt32(splitLine[1]), Convert.ToInt32(splitLine[2]));
 			var track = ParseTrack(splitLine);
-			LevelInform.Enemies.Add(new RunTimeEnemy(location, track, Files.EnemyImagesPath));
+			LevelInform.Enemies.Add(new RunTimeEnemy(location, track));
 		}
 
 		private void ExtractEndMark(string line)
