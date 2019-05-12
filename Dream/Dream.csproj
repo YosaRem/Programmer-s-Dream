@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Drawer\Ads.cs" />
+    <Compile Include="Drawer\BulletDrawer.cs" />
     <Compile Include="EnemyClasses\Triangle.cs" />
     <Compile Include="Drawer\Drawer.cs" />
     <Compile Include="Drawer\EnemyDrawer.cs" />
@@ -94,6 +95,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PlayerClasses\RightAndLeft.cs" />
+    <Compile Include="WeponClasses\Bullet.cs" />
+    <Compile Include="WeponClasses\Wepon.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

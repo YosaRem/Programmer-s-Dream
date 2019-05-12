@@ -22,9 +22,8 @@ namespace Dream
 				["BUG"] = ExtractBugEnemy,
 				["RTE"] = ExtractRunTimeEnemy,
 				["END"] = ExtractEndMark,
-				["BOS"] = ExtractBoss,
-			    ["TRN"] = ExtractTriangle
-            };
+				["BOS"] = ExtractBoss
+			};
 		}
 
 		public void ExtractLevelFromFile()
@@ -93,6 +92,14 @@ namespace Dream
 			var location = new Point(Convert.ToInt32(splitLine[1]), Convert.ToInt32(splitLine[2]));
 			var track = ParseTrack(splitLine);
 			LevelInform.Enemies.Add(new Boss(location, track));
+		}
+
+		private void ExtractWepon(string line)
+		{
+			var splitLine = line.Split(' ');
+			var start = new Point(Convert.ToInt32(splitLine[1]), Convert.ToInt32(splitLine[2]));
+			var end = new Point(Convert.ToInt32(splitLine[3]), Convert.ToInt32(splitLine[4]));
+			LevelInform.Marks.Add(new Mark(start, end) {MarkType = MarkEnum.GiveWepon});
 		}
 
 		private List<Point> ParseTrack(string[] line)

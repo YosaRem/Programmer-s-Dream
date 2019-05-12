@@ -54,6 +54,8 @@ namespace Dream
 					CurrentLevel.Player.ChangeMoveType(MoveType.Left, CurrentLevel.LevelInform.Platforms);
 				if (args.KeyCode == Keys.R)
 					ResetLevel();
+				if(args.KeyCode == Keys.X)
+					CurrentLevel.Player.MakeShot();
 				if (args.KeyCode == Keys.Space)
 				{
 					if (CurrentGameInfo.IsLevelCompleated)

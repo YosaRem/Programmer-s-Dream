@@ -14,6 +14,7 @@ namespace Dream
 			DrawLevel(level, graphics);
 			DrawEnemys(level.LevelInform.Enemies, graphics);
 			DrawPlayer(level.Player, graphics);
+			DrawBullets(level.Player.PlayerWepon, graphics);
 		}
 
 		public static void DrawPlayer(Player player, Graphics graphics)
@@ -35,11 +36,21 @@ namespace Dream
             var triangleBrush = new SolidBrush(Color.DarkRed);
             graphics.DrawImage(level.Files.Background, new Point(0, 0));
 			foreach (var platform in level.LevelInform.Platforms)
-				graphics.FillRectangle(platformBrush, platform);
+				graphics.FillRectangle(brush, platform);
 			foreach (var mark in level.LevelInform.Marks)
 				mark.Draw(graphics);
 		    foreach (var triangle in level.LevelInform.Triangles)
 		        graphics.FillPolygon(triangleBrush, triangle.Points);
+		}
+
+		public static void DrawBullets(Wepon wepon, Graphics graphics)
+		{
+			if (wepon != null)
+			{
+				var bulletDrawer = new BulletDrawer();
+				foreach (var bullet in wepon.Bullets)
+					bulletDrawer.Draw(bullet, graphics);
+			}
 		}
 	}
 }

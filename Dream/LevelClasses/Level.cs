@@ -30,6 +30,9 @@ namespace Dream
 				foreach (var enemy in LevelInform.Enemies)
 					enemy.Move();
 				Player.Move(LevelInform.Platforms);
+				if(Player.PlayerWepon != null)
+					Player.PlayerWepon.MoveBullets();
+				IsPlayerIntersectMark();
 			}
 		}
 
@@ -38,6 +41,18 @@ namespace Dream
 			gameInfo.IsPlayerAlive = Player.IsPlayerAlive(LevelInform.Enemies, LevelInform.Triangles);
 			gameInfo.IsLevelCompleated = IsLevelCompeted();
 			GameStat = gameInfo;
+		}
+
+		private void IsPlayerIntersectMark()
+		{
+			foreach (var mark in LevelInform.Marks)
+			{
+				if (mark.MarkType == MarkEnum.GiveWepon)
+				{
+					if(Player.Location.IntersectsWith(mark.Location))
+						Player.SetWepon(this);
+				}
+			}
 		}
 
 		private bool IsLevelCompeted()
