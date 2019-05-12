@@ -35,7 +35,7 @@ namespace Dream
 
 		public void TransformGameStat(GameInfo gameInfo)
 		{
-			gameInfo.IsPlayerAlive = Player.IsPlayerAlive(LevelInform.Enemies);
+			gameInfo.IsPlayerAlive = Player.IsPlayerAlive(LevelInform.Enemies, LevelInform.Triangles);
 			gameInfo.IsLevelCompleated = IsLevelCompeted();
 			GameStat = gameInfo;
 		}

@@ -22,8 +22,9 @@ namespace Dream
 				["BUG"] = ExtractBugEnemy,
 				["RTE"] = ExtractRunTimeEnemy,
 				["END"] = ExtractEndMark,
-				["BOS"] = ExtractBoss
-			};
+				["BOS"] = ExtractBoss,
+			    ["TRN"] = ExtractTriangle
+            };
 		}
 
 		public void ExtractLevelFromFile()
@@ -106,5 +107,12 @@ namespace Dream
 
 			return track;
 		}
-	}
+
+	    private void ExtractTriangle(string line)
+	    {
+	        var splitLine = line.Split(' ');
+	        LevelInform.Triangles.Add(new Triangle(new Point( Convert.ToInt32(splitLine[1]),
+	            Convert.ToInt32(splitLine[2]))));
+	    }
+    }
 }

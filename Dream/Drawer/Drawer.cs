@@ -31,12 +31,15 @@ namespace Dream
 
 		public static void DrawLevel(Level level, Graphics graphics)
 		{
-			var brush = new SolidBrush(Color.DarkSlateGray);
-			graphics.DrawImage(level.Files.Background, new Point(0, 0));
+			var platformBrush = new SolidBrush(Color.DarkSlateGray);
+            var triangleBrush = new SolidBrush(Color.DarkRed);
+            graphics.DrawImage(level.Files.Background, new Point(0, 0));
 			foreach (var platform in level.LevelInform.Platforms)
-				graphics.FillRectangle(brush, platform);
+				graphics.FillRectangle(platformBrush, platform);
 			foreach (var mark in level.LevelInform.Marks)
 				mark.Draw(graphics);
+		    foreach (var triangle in level.LevelInform.Triangles)
+		        graphics.FillPolygon(triangleBrush, triangle.Points);
 		}
 	}
 }

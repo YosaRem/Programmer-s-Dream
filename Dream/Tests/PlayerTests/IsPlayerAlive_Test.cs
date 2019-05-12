@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace Dream.PlayerClasses
+namespace Dream
 {
 	[TestFixture]
 	public class IsPlayerAlive_Test
@@ -23,7 +23,7 @@ namespace Dream.PlayerClasses
 		{
 			var player = CreatePlayer();
 
-			Assert.IsTrue(player.IsPlayerAlive(new List<Enemy>()));
+			Assert.IsTrue(player.IsPlayerAlive(new List<Enemy>(), new List<Triangle>()));
 		}
 
 		[Test]
@@ -33,7 +33,7 @@ namespace Dream.PlayerClasses
 			var enemy = new Enemy(new Point(player.Location.X, player.Location.Y),
 				new List<Point>());
 
-			Assert.IsFalse(player.IsPlayerAlive(new List<Enemy>() {enemy}));
+			Assert.IsFalse(player.IsPlayerAlive(new List<Enemy>() {enemy}, new List<Triangle>()));
 		}
 
 		[Test]
@@ -44,13 +44,13 @@ namespace Dream.PlayerClasses
 				new List<Point>(){ new Point(player.Location.Right + 2, player.Location.Y) });
 			var platform = new Rectangle(player.Location.Left, player.Location.Bottom, 100, 20);
 
-			Assert.IsTrue(player.IsPlayerAlive(new List<Enemy>() { enemy }));
+			Assert.IsTrue(player.IsPlayerAlive(new List<Enemy>() { enemy }, new List<Triangle>()));
 
 			player.ChangeMoveType(MoveType.Right,
 				new List<Rectangle>(new List<Rectangle>(){platform}));
 			player.Move(new List<Rectangle>() {platform});
 
-			Assert.IsFalse(player.IsPlayerAlive(new List<Enemy>() { enemy }));
+			Assert.IsFalse(player.IsPlayerAlive(new List<Enemy>() { enemy }, new List<Triangle>()));
 		}
 	}
 }

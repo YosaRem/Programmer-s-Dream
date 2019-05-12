@@ -44,11 +44,14 @@ namespace Dream
 			Location = new Rectangle(new Point(newX, newY), Location.Size);
 		}
 
-		public bool IsPlayerAlive(List<Enemy> enemies)
+		public bool IsPlayerAlive(List<Enemy> enemies, List<Triangle> triangles)
 		{
 			foreach (var enemy in enemies)
 				if (Location.IntersectsWith(enemy.Location))
-					return false;			
+					return false;
+		    foreach (var triangle in triangles)
+		        if (Location.IntersectsWith(triangle.Location))
+		            return false;
 			return true;
 		}
 	}

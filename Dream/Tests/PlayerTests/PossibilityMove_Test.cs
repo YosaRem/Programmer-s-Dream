@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 
 
-namespace Dream.PlayerClasses
+namespace Dream
 {
 	[TestFixture]
 	public class PossibilityMove_Test

@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Drawer\Ads.cs" />
+    <Compile Include="EnemyClasses\Triangle.cs" />
     <Compile Include="Drawer\Drawer.cs" />
     <Compile Include="Drawer\EnemyDrawer.cs" />
     <Compile Include="EnemyClasses\Boss.cs" />
@@ -65,7 +66,7 @@
     <Compile Include="FileManadger\EnemyImages.cs" />
     <Compile Include="FileManadger\LevelFiles.cs" />
     <Compile Include="FileManadger\PlayerImages.cs" />
-    <Compile Include="LevelClasses\Extractor_Test.cs" />
+    <Compile Include="Tests\LevelExtractorTests\Extractor_Test.cs" />
     <Compile Include="MarkClasses\EndLevel.cs" />
     <Compile Include="MarkClasses\Mark.cs" />
     <Compile Include="MarkClasses\MarkEnum.cs" />
@@ -82,14 +83,14 @@
     <Compile Include="EnemyClasses\Enemy.cs" />
     <Compile Include="GameInfo.cs" />
     <Compile Include="LevelClasses\LevelInformation.cs" />
-    <Compile Include="PlayerClasses\IsPlayerAlive_Test.cs" />
+    <Compile Include="Tests\PlayerTests\IsPlayerAlive_Test.cs" />
     <Compile Include="PlayerClasses\JumpAndFall.cs" />
     <Compile Include="LevelClasses\Level.cs" />
     <Compile Include="PlayerClasses\MoveTypeEnum.cs" />
     <Compile Include="PlayerClasses\Player.cs" />
     <Compile Include="Drawer\PlayerAnimation.cs" />
     <Compile Include="PlayerClasses\PossibilityMove.cs" />
-    <Compile Include="PlayerClasses\PossibilityMove_Test.cs" />
+    <Compile Include="Tests\PlayerTests\PossibilityMove_Test.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PlayerClasses\RightAndLeft.cs" />
@@ -121,6 +122,7 @@
     <Folder Include="GameData\Enemys\" />
     <Folder Include="GameData\Images\" />
     <Folder Include="GameData\Player\" />
+    <Folder Include="Tests\EnemyTests\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="GameData\Leveles\0.txt" />
