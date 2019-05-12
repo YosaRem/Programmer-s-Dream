@@ -25,7 +25,7 @@ namespace Dream
 			CurrentGameInfo = new GameInfo();
 			CurrentLevel = new Level(GameFiles.CurrentLevel);
 			var timer = new Timer();		
-			timer.Interval = 10;
+			timer.Interval = 15;
 
 			KeyPressing();
 			TickCommands(timer);

@@ -36,11 +36,11 @@ namespace Dream
 			fallFrameCount = RecalculateCount(fallFrameCount, PlayerImages.fallFrames.Count);
 			var frame = (Image)PlayerImages.fallFrames[fallFrameCount].Clone();
 			if (player.CurrentTypeMovement == MoveType.Right)
-				graphics.DrawImage(frame, player.Location);
+				graphics.DrawImage(frame, player.Location.Location);
 			else
 			{
 				frame.RotateFlip(RotateFlipType.RotateNoneFlipX);
-				graphics.DrawImage(frame, player.Location);
+				graphics.DrawImage(frame, player.Location.Location);
 			}
 		}
 
