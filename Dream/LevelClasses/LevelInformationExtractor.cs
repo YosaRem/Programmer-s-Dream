@@ -23,7 +23,9 @@ namespace Dream
 				["RTE"] = ExtractRunTimeEnemy,
 				["END"] = ExtractEndMark,
 				["BOS"] = ExtractBoss,
-                ["TRN"] = ExtractTriangle
+                ["TRN"] = ExtractTriangle,
+                ["WEP"] = ExtractWepon,
+                ["STR"] = ExtractString
             };
 		}
 
@@ -47,7 +49,18 @@ namespace Dream
 			}
 		}
 
-		private void ExtractPlatform(string line)
+
+	    private void ExtractString(string line)
+	    {
+	        var splitLine = line.Split(' ');
+	        for (int i = 1; i < splitLine.Length; i++)
+	        {
+	            LevelInform.Message += splitLine[i] + ' ';
+
+	        }
+	    }
+
+        private void ExtractPlatform(string line)
 		{
 			var splitLine = line.Split(' ');
 			LevelInform.Platforms.Add(new Rectangle(Convert.ToInt32(splitLine[1]),

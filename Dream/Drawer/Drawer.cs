@@ -34,6 +34,7 @@ namespace Dream
 		{
 			var platformBrush = new SolidBrush(Color.DarkSlateGray);
             var triangleBrush = new SolidBrush(Color.DarkRed);
+            var textBrush = new SolidBrush(Color.White);
             graphics.DrawImage(level.Files.Background, new Point(0, 0));
 			foreach (var platform in level.LevelInform.Platforms)
 		        graphics.FillRectangle(platformBrush, platform);
@@ -41,6 +42,7 @@ namespace Dream
 				mark.Draw(graphics);
 		    foreach (var triangle in level.LevelInform.Triangles)
 		        graphics.FillPolygon(triangleBrush, triangle.Points);
+            graphics.DrawString(level.LevelInform.Message, new System.Drawing.Font("Arial", 14), textBrush, new PointF(600, 30));
 		}
 
 		public static void DrawBullets(Wepon wepon, Graphics graphics)

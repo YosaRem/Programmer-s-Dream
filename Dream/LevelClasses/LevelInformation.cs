@@ -16,7 +16,8 @@ namespace Dream
         public List<Mark> Marks { get; private set; }
 		public Rectangle LevelFinish { get; set; }
 		public Boss LevelBoss { get; set; }
-		private LevelFiles Files { get; set; }
+        public string Message { get; set; }
+        private LevelFiles Files { get; set; }
 		public LevelInformationExtractor Extractor { get; set; }
 
 		public LevelInformation(LevelFiles files)
@@ -26,7 +27,7 @@ namespace Dream
 			Platforms = new List<Rectangle>();
 			Marks = new List<Mark>();
             Triangles = new List<Triangle>();
-			Extractor = new LevelInformationExtractor(this, files);
+		    Extractor = new LevelInformationExtractor(this, files);
 			ExtractLevelFromFile();
 			FindFinish();
 			FindBoss();
