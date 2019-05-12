@@ -130,7 +130,6 @@
   <ItemGroup>
     <Content Include="GameData\Leveles\0.txt" />
     <Content Include="GameData\Leveles\1.txt" />
-    <Content Include="GameData\Leveles\2.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

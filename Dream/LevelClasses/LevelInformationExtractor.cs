@@ -22,7 +22,7 @@ namespace Dream
 				["BUG"] = ExtractBugEnemy,
 				["RTE"] = ExtractRunTimeEnemy,
 				["END"] = ExtractEndMark,
-				["BOS"] = ExtractBoss
+				["BOS"] = ExtractBoss,
                 ["TRN"] = ExtractTriangle
             };
 		}
