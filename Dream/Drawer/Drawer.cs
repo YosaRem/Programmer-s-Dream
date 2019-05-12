@@ -35,17 +35,7 @@ namespace Dream
 			var brush = new SolidBrush(Color.DarkSlateGray);
 			graphics.DrawImage(level.Files.Background, new Point(0, 0));
 			foreach (var platform in level.LevelInform.Platforms)
-			{
-				graphics.DrawRectangle(new Pen(brush), platform);
-				graphics.DrawString("USING SYSTEM.DRAWING;", new Font("Arial", 10),
-					Brushes.Blue, platform,
-					new StringFormat
-					{
-						Alignment = StringAlignment.Center,
-						LineAlignment = StringAlignment.Center,
-						FormatFlags = StringFormatFlags.FitBlackBox
-					});
-			}
+				graphics.FillRectangle(brush, platform);
 				
 			foreach (var mark in level.LevelInform.Marks)
 				mark.Draw(graphics);
