@@ -15,6 +15,7 @@ namespace Dream
 		public JumpAndFall JumpAbility { get; private set; }
 		public RightAndLeft GoAbility { get; set; }
 		public PossibilityMove PossibilityMove { get; set; }
+		public Wepon PlayerWepon { get; set; }
 
 		public Player(Point startLocation)
 		{		
@@ -24,6 +25,17 @@ namespace Dream
 			CurrentTypeMovement = MoveType.Stand;
 			JumpAbility = new JumpAndFall();
 			GoAbility = new RightAndLeft();
+		}
+
+		public void MakeShot()
+		{
+			if(PlayerWepon != null)
+				PlayerWepon.MakeShot(this);
+		}
+
+		public void SetWepon(Level level)
+		{
+			PlayerWepon = new Wepon(level);
 		}
 
 		public void ChangeMoveType(MoveType newMove, List<Rectangle> platforms)
