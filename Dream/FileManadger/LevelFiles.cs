@@ -14,7 +14,7 @@ namespace Dream
 
 		public LevelFiles(string dir, int levelNumber)
 		{
-			Background = Image.FromFile(dir + @"\Images\background1" + ".JPG");
+			Background = Image.FromFile(dir + @"\Images\background" + levelNumber.ToString() + ".JPG");
 			PathToLevelFile = dir + @"\Leveles\" + levelNumber.ToString() + ".txt";
 		}
 	}

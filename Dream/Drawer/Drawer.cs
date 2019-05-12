@@ -36,7 +36,7 @@ namespace Dream
             var triangleBrush = new SolidBrush(Color.DarkRed);
             graphics.DrawImage(level.Files.Background, new Point(0, 0));
 			foreach (var platform in level.LevelInform.Platforms)
-				graphics.FillRectangle(brush, platform);
+		        graphics.FillRectangle(platformBrush, platform);
 			foreach (var mark in level.LevelInform.Marks)
 				mark.Draw(graphics);
 		    foreach (var triangle in level.LevelInform.Triangles)

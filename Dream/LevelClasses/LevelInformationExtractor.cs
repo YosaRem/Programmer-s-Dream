@@ -23,7 +23,8 @@ namespace Dream
 				["RTE"] = ExtractRunTimeEnemy,
 				["END"] = ExtractEndMark,
 				["BOS"] = ExtractBoss
-			};
+                ["TRN"] = ExtractTriangle
+            };
 		}
 
 		public void ExtractLevelFromFile()
