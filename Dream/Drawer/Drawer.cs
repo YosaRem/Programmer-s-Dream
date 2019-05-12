@@ -39,7 +39,10 @@ namespace Dream
 			foreach (var platform in level.LevelInform.Platforms)
 		        graphics.FillRectangle(platformBrush, platform);
 			foreach (var mark in level.LevelInform.Marks)
-				mark.Draw(graphics);
+			{
+				var markDrawer = new MarkDrawer();
+				markDrawer.Drawers[mark.MarkType](mark, graphics);
+			}
 		    foreach (var triangle in level.LevelInform.Triangles)
 		        graphics.FillPolygon(triangleBrush, triangle.Points);
             graphics.DrawString(level.LevelInform.Message, new System.Drawing.Font("Arial", 14), textBrush, new PointF(600, 30));

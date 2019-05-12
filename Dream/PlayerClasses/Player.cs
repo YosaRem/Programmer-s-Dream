@@ -10,10 +10,10 @@ namespace Dream
 {
 	public class Player
 	{
-		public Rectangle Location { get; set; }
+		public Rectangle Location { get; private set; }
 		public MoveType CurrentTypeMovement { get; private set; }
 		public JumpAndFall JumpAbility { get; private set; }
-		public RightAndLeft GoAbility { get; set; }
+		public RightAndLeft GoAbility { get; private set; }
 		public PossibilityMove PossibilityMove { get; set; }
 		public Wepon PlayerWepon { get; set; }
 
