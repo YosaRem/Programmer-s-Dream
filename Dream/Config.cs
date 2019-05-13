@@ -15,5 +15,8 @@ namespace Dream
 		public const int EnemyDefautMoveDelta = 1;
 		public const int RunTimeEnemyMoveDelta = 50;
 		public const int Leap = 150;
+		public const int Damage = 10;
+		public const int BossHelth = 100;
+		public const int BulletSpeed = 6;
 	}
 }

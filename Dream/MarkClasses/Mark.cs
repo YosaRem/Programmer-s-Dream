@@ -16,10 +16,5 @@ namespace Dream
         {
             Location = new Rectangle(start.X, start.Y, 1, end.Y - start.Y);
         }
-
-        public virtual void Draw(Graphics graphics)
-        {
-            graphics.DrawRectangle(new Pen(Color.Brown, 2), Location);
-        }
     }
 }

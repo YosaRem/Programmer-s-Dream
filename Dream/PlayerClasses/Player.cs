@@ -10,25 +10,33 @@ namespace Dream
 {
 	public class Player
 	{
-		public Rectangle Location { get; set; }
+		public Rectangle Location { get; private set; }
 		public MoveType CurrentTypeMovement { get; private set; }
 		public JumpAndFall JumpAbility { get; private set; }
-		public RightAndLeft GoAbility { get; set; }
+		public RightAndLeft GoAbility { get; private set; }
 		public PossibilityMove PossibilityMove { get; set; }
-		public PlayerAnimation Animation { get; set; }
+		public Wepon PlayerWepon { get; set; }
 
 		public Player(Point startLocation)
-		{			
-			Animation = new PlayerAnimation();
+		{		
 			PossibilityMove = new PossibilityMove();
-			var PlayerSize = Image.FromFile(GamesFiles.PlayerImages + @"\Stand\0.png").Size;
+			var PlayerSize = PlayerImages.standFrames[0].Size;
 			Location = new Rectangle(startLocation, PlayerSize);
 			CurrentTypeMovement = MoveType.Stand;
 			JumpAbility = new JumpAndFall();
 			GoAbility = new RightAndLeft();
 		}
 
-		public void DrawPlayer(Graphics graphics) => Animation.MovementSet[CurrentTypeMovement](this, graphics);
+		public void MakeShot()
+		{
+			if(PlayerWepon != null)
+				PlayerWepon.MakeShot(this);
+		}
+
+		public void SetWepon(Level level)
+		{
+			PlayerWepon = new Wepon(level);
+		}
 
 		public void ChangeMoveType(MoveType newMove, List<Rectangle> platforms)
 		{
@@ -48,11 +56,14 @@ namespace Dream
 			Location = new Rectangle(new Point(newX, newY), Location.Size);
 		}
 
-		public bool IsPlayerAlive(List<Enemy> enemies)
+		public bool IsPlayerAlive(List<Enemy> enemies, List<Triangle> triangles)
 		{
 			foreach (var enemy in enemies)
 				if (Location.IntersectsWith(enemy.Location))
-					return false;			
+					return false;
+		    foreach (var triangle in triangles)
+		        if (Location.IntersectsWith(triangle.Location))
+		            return false;
 			return true;
 		}
 	}

@@ -25,7 +25,7 @@ namespace Dream
 			CurrentGameInfo = new GameInfo();
 			CurrentLevel = new Level(GameFiles.CurrentLevel);
 			var timer = new Timer();		
-			timer.Interval = 10;
+			timer.Interval = 15;
 
 			KeyPressing();
 			TickCommands(timer);
@@ -36,10 +36,8 @@ namespace Dream
 				if (CurrentGameInfo.IsLevelCompleated)
 					Ads.LevelCompleted(args.Graphics);
 				else if (CurrentGameInfo.IsPlayerAlive)
-				{
-					CurrentLevel.DrawLevel(args.Graphics);
-					CurrentLevel.Player.DrawPlayer(args.Graphics);
-				}else
+					Drawer.DrawAll(CurrentLevel, args.Graphics);
+				else
 					Ads.YouDied(args.Graphics);
 			};
 		}
@@ -56,17 +54,20 @@ namespace Dream
 					CurrentLevel.Player.ChangeMoveType(MoveType.Left, CurrentLevel.LevelInform.Platforms);
 				if (args.KeyCode == Keys.R)
 					ResetLevel();
+				if(args.KeyCode == Keys.X)
+					CurrentLevel.Player.MakeShot();
 				if (args.KeyCode == Keys.Space)
 				{
 					if (CurrentGameInfo.IsLevelCompleated)
 					{
-						GameFiles.NextLevel();
+						GameFiles.GetNextLevel();
 						CurrentLevel = new Level(GameFiles.CurrentLevel);
 					}
 				}
 			};
 			KeyUp += (sender, args) =>
 			{
+
 				if(args.KeyCode == Keys.Right || args.KeyCode == Keys.Left)
 					CurrentLevel.Player.ChangeMoveType(MoveType.Stand, CurrentLevel.LevelInform.Platforms);
 			};

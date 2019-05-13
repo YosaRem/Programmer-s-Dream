@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dream
 {
@@ -24,13 +21,17 @@ namespace Dream
 				["PLE"] = ExtractPlayer,
 				["BUG"] = ExtractBugEnemy,
 				["RTE"] = ExtractRunTimeEnemy,
-				["END"] = ExtractEndMark
-			};
+				["END"] = ExtractEndMark,
+				["BOS"] = ExtractBoss,
+                ["TRN"] = ExtractTriangle,
+                ["WEP"] = ExtractWepon,
+                ["STR"] = ExtractString
+            };
 		}
 
 		public void ExtractLevelFromFile()
 		{
-			var level = new StreamReader(Files.Path);
+			var level = new StreamReader(Files.PathToLevelFile);
 			var line = level.ReadLine();
 			while (line != null)
 			{
@@ -41,15 +42,25 @@ namespace Dream
 				}
 				catch
 				{
-                    throw new Exception();
-					//throw new Exception("Can's cast file with level in line - " + line);
+					throw new Exception("Can's cast file with level in line - " + line);
 				}
 
 				line = level.ReadLine();
 			}
 		}
 
-		private void ExtractPlatform(string line)
+
+	    private void ExtractString(string line)
+	    {
+	        var splitLine = line.Split(' ');
+	        for (int i = 1; i < splitLine.Length; i++)
+	        {
+	            LevelInform.Message += splitLine[i] + ' ';
+
+	        }
+	    }
+
+        private void ExtractPlatform(string line)
 		{
 			var splitLine = line.Split(' ');
 			LevelInform.Platforms.Add(new Rectangle(Convert.ToInt32(splitLine[1]),
@@ -70,7 +81,7 @@ namespace Dream
 			var splitLine = line.Split(' ');
 			var location = new Point(Convert.ToInt32(splitLine[1]), Convert.ToInt32(splitLine[2]));
 			var track = ParseTrack(splitLine);
-			LevelInform.Enemies.Add(new BugEnemy(location, track, Files.EnemyImagesPath));
+			LevelInform.Enemies.Add(new BugEnemy(location, track));
 		}
 
 		private void ExtractRunTimeEnemy(string line)
@@ -78,7 +89,7 @@ namespace Dream
 			var splitLine = line.Split(' ');
 			var location = new Point(Convert.ToInt32(splitLine[1]), Convert.ToInt32(splitLine[2]));
 			var track = ParseTrack(splitLine);
-			LevelInform.Enemies.Add(new RunTimeEnemy(location, track, Files.EnemyImagesPath));
+			LevelInform.Enemies.Add(new RunTimeEnemy(location, track));
 		}
 
 		private void ExtractEndMark(string line)
@@ -87,6 +98,22 @@ namespace Dream
 			var start = new Point(Convert.ToInt32(splitLine[1]), Convert.ToInt32(splitLine[2]));
 			var end = new Point(Convert.ToInt32(splitLine[3]), Convert.ToInt32(splitLine[4]));
 			LevelInform.Marks.Add(new EndLevel(start, end));
+		}
+
+		private void ExtractBoss(string line)
+		{
+			var splitLine = line.Split(' ');
+			var location = new Point(Convert.ToInt32(splitLine[1]), Convert.ToInt32(splitLine[2]));
+			var track = ParseTrack(splitLine);
+			LevelInform.Enemies.Add(new Boss(location, track));
+		}
+
+		private void ExtractWepon(string line)
+		{
+			var splitLine = line.Split(' ');
+			var start = new Point(Convert.ToInt32(splitLine[1]), Convert.ToInt32(splitLine[2]));
+			var end = new Point(Convert.ToInt32(splitLine[3]), Convert.ToInt32(splitLine[4]));
+			LevelInform.Marks.Add(new Mark(start, end) {MarkType = MarkEnum.GiveWepon});
 		}
 
 		private List<Point> ParseTrack(string[] line)
@@ -101,5 +128,12 @@ namespace Dream
 
 			return track;
 		}
-	}
+
+	    private void ExtractTriangle(string line)
+	    {
+	        var splitLine = line.Split(' ');
+	        LevelInform.Triangles.Add(new Triangle(new Point( Convert.ToInt32(splitLine[1]),
+	            Convert.ToInt32(splitLine[2]))));
+	    }
+    }
 }

@@ -11,26 +11,14 @@ namespace Dream
 {
 	public class RunTimeEnemy : Enemy
 	{
-		private Image RTImage { get; set; }
-		private int Leap { get; set; }
-		private Rectangle RecalculatedLocation { get; set; }
+		public int Leap { get; set; }
+		public Rectangle RecalculatedLocation { get; private set; }
 
-		public RunTimeEnemy(Point location, List<Point> track, string dir) : base(location, track)
-		{ 
-			Leap = Config.Leap;
-			RTImage = Image.FromFile(dir + @"\RT.png");
-			RecalculatedLocation = Location;
-		}
-
-		public override void Draw(Graphics graphics)
+		public RunTimeEnemy(Point location, List<Point> track) : base(location, track)
 		{
-			if (Leap == Config.Leap)
-			{
-				Location = RecalculatedLocation;
-				Leap = 0;
-			}
-			Leap++;
-			graphics.DrawImage(RTImage, Location);
+			TypeEnemy = EnemyType.RunTime;
+			Leap = Config.Leap;
+			RecalculatedLocation = Location;
 		}
 
 		public override void Move()
@@ -39,7 +27,7 @@ namespace Dream
 			var newY = TrackMove.RecalculateY(this, Config.RunTimeEnemyMoveDelta);
 			if (newX == Track[CurrentDestinationPoint].X && newY == Track[CurrentDestinationPoint].Y)
 				CurrentDestinationPoint = ((CurrentDestinationPoint + Track.Count + 1) % Track.Count);
-			RecalculatedLocation = new Rectangle(newX, newY, 25, 25);
+			RecalculatedLocation = new Rectangle(newX, newY, Location.Width, Location.Height);
 		}
 	}
 }
